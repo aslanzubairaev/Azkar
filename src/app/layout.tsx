@@ -1,10 +1,16 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Noto_Naskh_Arabic } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-inter',
+});
+
+const notoNaskhArabic = Noto_Naskh_Arabic({
+  subsets: ['arabic'],
+  weight: ['400', '500', '700'],
+  variable: '--font-arabic',
 });
 
 export const metadata: Metadata = {
@@ -18,14 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className={inter.className}>{children}</body>
+    <html lang="ru" className={`${inter.variable} ${notoNaskhArabic.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
