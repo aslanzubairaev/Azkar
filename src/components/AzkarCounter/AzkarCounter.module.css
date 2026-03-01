@@ -1,0 +1,88 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+.checkBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--dot-empty);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkBtn:hover:not(.done) {
+  border-color: var(--dot-filled);
+  color: var(--dot-filled);
+}
+
+.checkBtn.done {
+  border-color: var(--accent-done);
+  background: var(--accent-done);
+  color: white;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--dot-empty);
+  transition: background 0.15s ease, transform 0.15s ease;
+  display: inline-block;
+}
+
+.dotFilled {
+  background: var(--dot-filled);
+  transform: scale(1.15);
+}
+
+.label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.ringBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.ringBtn.done circle:last-of-type {
+  stroke: var(--accent-done);
+}
+
+.resetBtn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.resetBtn:hover {
+  color: var(--text-primary);
+}
