@@ -1,0 +1,75 @@
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: #40484f;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.number {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  min-width: 24px;
+}
+
+.title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.countBadge {
+  font-size: 0.75rem;
+  color: var(--text-transliteration);
+  background: rgba(212, 168, 67, 0.12);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.transliteration {
+  font-size: 0.875rem;
+  color: var(--text-transliteration);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.arabic {
+  /* .arabic class from globals.css provides RTL + font */
+}
+
+.translation {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  opacity: 0.5;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
