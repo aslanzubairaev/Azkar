@@ -1,0 +1,45 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-primary: #0d1117;
+  --bg-card: #161b22;
+  --bg-card-hover: #1c2230;
+  --border: #30363d;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-arabic: #ffffff;
+  --text-transliteration: #d4a843;
+  --accent: #58a6ff;
+  --accent-done: #3fb950;
+  --accent-ring: #d4a843;
+  --dot-empty: #30363d;
+  --dot-filled: #d4a843;
+  --tab-active-bg: #1c2a40;
+  --tab-active-border: #58a6ff;
+  --font-arabic: 'Noto Naskh Arabic', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.arabic {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  text-align: right;
+  font-size: 1.5rem;
+  line-height: 2.2;
+  color: var(--text-arabic);
+}
