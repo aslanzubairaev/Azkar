@@ -19,6 +19,16 @@
   display: block;
 }
 
+/* Задний ряд гор — чуть светлее фона */
+.mountainBack {
+  fill: var(--color-surface);
+}
+
+/* Передний ряд гор — цвет фона страницы */
+.mountainFront {
+  fill: var(--color-bg);
+}
+
 /* Арабский заголовок أَذْكَار */
 .title {
   font-family: 'Noto Naskh Arabic', serif;
