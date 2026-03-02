@@ -1,3 +1,10 @@
+/*
+  Глобальные стили сайта — переменные, сброс стилей, базовые правила.
+  Здесь хранятся цвета палитры «Горный Кавказ», настройки шрифтов
+  и единственный глобальный класс .arabic для арабского текста.
+  Стили конкретных страниц и компонентов — в их собственных .module.css файлах.
+*/
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -5,22 +12,36 @@
 }
 
 :root {
-  --bg-primary: #0d1117;
-  --bg-card: #161b22;
-  --bg-card-hover: #1c2230;
-  --border: #30363d;
-  --text-primary: #e6edf3;
-  --text-secondary: #8b949e;
-  --text-arabic: #ffffff;
-  --text-transliteration: #d4a843;
-  --accent: #58a6ff;
-  --accent-done: #3fb950;
-  --accent-ring: #d4a843;
-  --dot-empty: #30363d;
-  --dot-filled: #d4a843;
-  --tab-active-bg: #1c2a40;
-  --tab-active-border: #58a6ff;
-  --font-arabic: 'Noto Naskh Arabic', serif;
+  --color-bg:         #252829;
+  --color-surface:    #2f3335;
+  --color-surface-2:  #383e41;
+  --color-border:     #4a5154;
+  --color-terracotta: #c1694f;
+  --color-copper:     #b07d4a;
+  --color-milk:       #f0ebe1;
+  --color-milk-dim:   #c4bdb2;
+  --color-arabic:     #ffffff;
+  --color-number:     #4a5154;
+  --color-done:       #4a9e6b;
+  --color-accent-stress: #d44;
+
+  /* Обратная совместимость — старые имена указывают на новые значения */
+  --bg-primary:       var(--color-bg);
+  --bg-card:          var(--color-surface);
+  --bg-card-hover:    var(--color-surface-2);
+  --border:           var(--color-border);
+  --text-primary:     var(--color-milk);
+  --text-secondary:   var(--color-milk-dim);
+  --text-arabic:      var(--color-arabic);
+  --text-transliteration: var(--color-copper);
+  --accent:           var(--color-terracotta);
+  --accent-done:      var(--color-done);
+  --accent-ring:      var(--color-copper);
+  --dot-empty:        var(--color-border);
+  --dot-filled:       var(--color-copper);
+  --tab-active-bg:    transparent;
+  --tab-active-border: var(--color-terracotta);
+  --font-arabic:      'Noto Naskh Arabic', serif;
 }
 
 html {
@@ -28,11 +49,12 @@ html {
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-milk);
+  font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
 .arabic {
