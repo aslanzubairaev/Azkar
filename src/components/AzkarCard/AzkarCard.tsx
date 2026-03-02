@@ -1,7 +1,8 @@
 /*
   Это карточка одного азкара.
-  Она показывает: порядковый номер, название, транслитерацию (чеченское произношение),
-  арабский текст, перевод на русский, и кнопки — аудиоплеер и счётчик повторений.
+  Она показывает: порядковый номер, название, арабский текст,
+  транслитерацию (чеченское произношение), перевод на русский,
+  и кнопки — аудиоплеер и счётчик повторений.
 */
 import { AzkarItem } from '@/types/azkar';
 import AzkarCounter from '@/components/AzkarCounter/AzkarCounter';
@@ -22,14 +23,14 @@ export default function AzkarCard({ azkar, index }: AzkarCardProps) {
         <span className={styles.countBadge}>×{azkar.count}</span>
       </header>
 
-      <div className={styles.transliteration}>
-        {azkar.transliteration}
+      <div className={`${styles.arabic} arabic`}>
+        {azkar.arabic}
       </div>
 
       <div className={styles.divider} />
 
-      <div className={`${styles.arabic} arabic`}>
-        {azkar.arabic}
+      <div className={styles.transliteration}>
+        {azkar.transliteration}
       </div>
 
       <div className={styles.divider} />
