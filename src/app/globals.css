@@ -23,7 +23,7 @@
   --color-arabic:     #ffffff;
   --color-number:     #4a5154;
   --color-done:       #4a9e6b;
-  --color-accent-stress: #d44;
+  --color-accent-stress: #d44; /* красный цвет для ударных букв в транслитерации */
 
   /* Обратная совместимость — старые имена указывают на новые значения */
   --bg-primary:       var(--color-bg);
@@ -51,9 +51,11 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-milk);
+  /* --font-body задаётся через next/font в layout.tsx */
   font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  /* Лёгкий зернистый шум поверх фона, имитирует текстуру камня */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
