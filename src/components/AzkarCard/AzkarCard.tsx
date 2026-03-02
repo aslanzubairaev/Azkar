@@ -3,6 +3,7 @@
   Она показывает: порядковый номер, название, арабский текст,
   транслитерацию (чеченское произношение), перевод на русский,
   и кнопки — аудиоплеер и счётчик повторений.
+  Буквы с ударением в транслитерации выделяются красным цветом.
 */
 import { AzkarItem } from '@/types/azkar';
 import AzkarCounter from '@/components/AzkarCounter/AzkarCounter';
@@ -12,6 +13,14 @@ import styles from './AzkarCard.module.css';
 interface AzkarCardProps {
   azkar: AzkarItem;
   index: number;
+}
+
+// Разбивает текст транслитерации на части и оборачивает ударные буквы в <span> красного цвета.
+function renderWithAccents(text: string) {
+  const parts = text.split(/([\u0400-\u04FF]\u0301|[áéíóúýÁÉÍÓÚÝ])/g);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? <span key={i} className={styles.accent}>{part}</span> : part
+  );
 }
 
 export default function AzkarCard({ azkar, index }: AzkarCardProps) {
@@ -30,7 +39,7 @@ export default function AzkarCard({ azkar, index }: AzkarCardProps) {
       <div className={styles.divider} />
 
       <div className={styles.transliteration}>
-        {azkar.transliteration}
+        {renderWithAccents(azkar.transliteration)}
       </div>
 
       <div className={styles.divider} />

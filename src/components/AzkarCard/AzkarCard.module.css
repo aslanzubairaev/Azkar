@@ -47,6 +47,13 @@
   color: var(--text-transliteration);
   line-height: 1.7;
   font-style: italic;
+  /* Noto Sans корректно отображает знаки ударения над кириллицей */
+  font-family: var(--font-noto-sans), sans-serif;
+}
+
+/* Буква с ударением — выделяется красным */
+.accent {
+  color: #d44;
 }
 
 .arabic {
