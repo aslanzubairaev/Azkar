@@ -1,3 +1,11 @@
+/*
+  Это счётчик повторений азкара.
+  Он показывает, сколько раз нужно повторить азкар, и отмечает каждое нажатие.
+  Если повторить нужно 1 раз — показывает галочку.
+  Если до 10 раз — показывает точки.
+  Если 100 раз — показывает круговой прогресс-бар.
+  Когда все повторения выполнены, можно сбросить счётчик и начать заново.
+*/
 'use client';
 import { useState, useCallback } from 'react';
 import styles from './AzkarCounter.module.css';
@@ -8,9 +16,11 @@ interface AzkarCounterProps {
 }
 
 export default function AzkarCounter({ total, onComplete }: AzkarCounterProps) {
+  // Запоминает сколько раз пользователь уже нажал
   const [current, setCurrent] = useState(0);
   const done = current >= total;
 
+  // Засчитывает одно нажатие и сообщает о завершении если выполнены все повторения
   const handleTap = useCallback(() => {
     if (done) return;
     const next = current + 1;
@@ -18,6 +28,7 @@ export default function AzkarCounter({ total, onComplete }: AzkarCounterProps) {
     if (next >= total) onComplete?.();
   }, [current, done, total, onComplete]);
 
+  // Сбрасывает счётчик на ноль чтобы начать заново
   const handleReset = useCallback(() => {
     setCurrent(0);
   }, []);

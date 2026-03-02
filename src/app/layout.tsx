@@ -1,3 +1,9 @@
+/*
+  Этот файл — корневая оболочка всего сайта.
+  Он подключает шрифты (Inter для текста, Noto Naskh Arabic для арабских букв)
+  и задаёт общие метаданные страницы (заголовок вкладки, описание для поисковиков).
+  Всё содержимое сайта отображается внутри него.
+*/
 import type { Metadata } from 'next';
 import { Inter, Noto_Naskh_Arabic } from 'next/font/google';
 import './globals.css';

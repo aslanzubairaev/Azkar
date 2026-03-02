@@ -1,3 +1,8 @@
+/*
+  Это карточка одного азкара.
+  Она показывает: порядковый номер, название, транслитерацию (чеченское произношение),
+  арабский текст, перевод на русский, и кнопки — аудиоплеер и счётчик повторений.
+*/
 import { AzkarItem } from '@/types/azkar';
 import AzkarCounter from '@/components/AzkarCounter/AzkarCounter';
 import AzkarAudio from '@/components/AzkarAudio/AzkarAudio';
