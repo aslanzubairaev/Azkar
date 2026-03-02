@@ -1,16 +1,29 @@
 /*
   Этот файл — корневая оболочка всего сайта.
-  Он подключает шрифты (Inter для текста, Noto Sans для транслитерации,
-  Noto Naskh Arabic для арабских букв) и задаёт общие метаданные страницы.
+  Он подключает шрифты (Playfair Display для заголовков и номеров,
+  Source Serif 4 для основного текста и переводов,
+  Noto Sans для транслитерации, Noto Naskh Arabic для арабских букв)
+  и задаёт общие метаданные страницы.
   Всё содержимое сайта отображается внутри него.
 */
 import type { Metadata } from 'next';
-import { Inter, Noto_Naskh_Arabic, Noto_Sans } from 'next/font/google';
+import { Playfair_Display, Source_Serif_4, Noto_Naskh_Arabic, Noto_Sans } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({
+// Playfair Display — для заголовков, названий, номеров азкаров
+const playfairDisplay = Playfair_Display({
   subsets: ['latin', 'cyrillic'],
-  variable: '--font-inter',
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+});
+
+// Source Serif 4 — для основного текста и переводов
+const sourceSerif4 = Source_Serif_4({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['300', '400', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-body',
 });
 
 // Noto Sans — для транслитерации: корректно отображает знаки ударения над кириллицей
@@ -38,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={`${inter.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
+    <html lang="ru" className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
       <body>{children}</body>
     </html>
   );
