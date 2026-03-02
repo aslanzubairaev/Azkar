@@ -1,13 +1,16 @@
 /*
   Это главная страница сайта с азкарами.
-  Она показывает список утренних или вечерних азкаров — на выбор пользователя.
+  Она показывает декоративную шапку с горными пиками (MountainHeader),
+  затем список утренних или вечерних азкаров — на выбор пользователя.
   Человек нажимает на вкладку «Утренние» или «Вечерние», и список меняется.
+  Карточки появляются с небольшой задержкой поочерёдно (анимация).
 */
 'use client';
 import { useState } from 'react';
 import { morningAzkar, eveningAzkar } from '@/data/azkar';
 import AzkarCard from '@/components/AzkarCard/AzkarCard';
 import styles from './page.module.css';
+import MountainHeader from '@/components/MountainHeader/MountainHeader';
 
 type Tab = 'morning' | 'evening';
 
@@ -18,11 +21,8 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {/* Шапка страницы с заголовком на арабском и подзаголовком */}
-      <header className={styles.header}>
-        <h1 className={styles.title}>أَذْكَار</h1>
-        <p className={styles.subtitle}>Утренние и вечерние азкары</p>
-      </header>
+      {/* Декоративная шапка с горными пиками и заголовком */}
+      <MountainHeader />
 
       {/* Переключатель между утренними и вечерними азкарами */}
       <nav className={styles.tabs}>
@@ -45,7 +45,13 @@ export default function Home() {
       {/* Список карточек азкаров для выбранной вкладки */}
       <section className={styles.list}>
         {list.map((azkar, i) => (
-          <AzkarCard key={azkar.id} azkar={azkar} index={i} />
+          <div
+            key={azkar.id}
+            className={styles.cardAnimate}
+            style={{ animationDelay: `${i * 0.05}s` }}
+          >
+            <AzkarCard azkar={azkar} index={i} />
+          </div>
         ))}
       </section>
     </main>
