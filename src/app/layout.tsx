@@ -34,6 +34,7 @@ const notoSans = Noto_Sans({
   variable: '--font-noto-sans',
 });
 
+// Noto Naskh Arabic — для отображения арабского текста молитв
 const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ['arabic'],
   weight: ['400', '500', '700'],
