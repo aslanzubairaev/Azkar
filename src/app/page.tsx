@@ -17,6 +17,7 @@ type Tab = 'morning' | 'evening';
 export default function Home() {
   // Запоминает, какая вкладка сейчас выбрана: утренние или вечерние азкары
   const [activeTab, setActiveTab] = useState<Tab>('morning');
+  // Список азкаров для выбранной вкладки
   const list = activeTab === 'morning' ? morningAzkar : eveningAzkar;
 
   return (
