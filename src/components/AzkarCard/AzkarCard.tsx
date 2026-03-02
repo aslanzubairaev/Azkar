@@ -25,7 +25,7 @@ function renderWithAccents(text: string) {
 
 export default function AzkarCard({ azkar, index }: AzkarCardProps) {
   return (
-    <article className={styles.card}>
+    <article className={styles.card} data-number={String(index + 1).padStart(2, '0')}>
       <header className={styles.header}>
         <span className={styles.number}>{String(index + 1).padStart(2, '0')}</span>
         <span className={styles.title}>{azkar.title}</span>

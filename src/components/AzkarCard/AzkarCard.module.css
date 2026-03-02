@@ -1,82 +1,118 @@
+/* Стили карточки одного азкара — каменная плита с терракотовым акцентом */
+
+/* Основная карточка */
 .card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-terracotta);
+  border-radius: 8px;
+  padding: 20px 20px 20px 18px;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transition: border-color 0.2s;
+  transition: border-left-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
+/* При наведении карточка чуть поднимается */
 .card:hover {
-  border-color: #40484f;
+  border-left-color: #d97b61;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
 }
 
+/* Декоративный водяной знак — большой номер в правом нижнем углу */
+.card::before {
+  content: attr(data-number);
+  position: absolute;
+  bottom: -10px;
+  right: 12px;
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  font-size: 6rem;
+  font-weight: 700;
+  color: var(--color-milk);
+  opacity: 0.04;
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Шапка карточки — номер, название, значок повторений */
 .header {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+/* Порядковый номер азкара */
 .number {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-border);
   font-variant-numeric: tabular-nums;
-  min-width: 24px;
+  min-width: 28px;
+  letter-spacing: 0.02em;
 }
 
+/* Название азкара */
 .title {
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--color-milk-dim);
   flex: 1;
 }
 
+/* Значок «×N повторений» */
 .countBadge {
-  font-size: 0.75rem;
-  color: var(--text-transliteration);
-  background: rgba(212, 168, 67, 0.12);
+  font-size: 0.72rem;
+  color: var(--color-copper);
+  background: rgba(176, 125, 74, 0.14);
   padding: 2px 8px;
   border-radius: 20px;
   font-weight: 600;
 }
 
+/* Транслитерация на чеченском — медный курсив */
 .transliteration {
   font-size: 0.875rem;
-  color: var(--text-transliteration);
+  color: var(--color-copper);
   line-height: 1.7;
   font-style: italic;
-  /* Noto Sans корректно отображает знаки ударения над кириллицей */
   font-family: var(--font-noto-sans), sans-serif;
 }
 
-/* Буква с ударением — выделяется красным */
+/* Ударная буква — красная */
 .accent {
-  color: #d44;
+  color: var(--color-accent-stress);
 }
 
-.arabic {
-  /* .arabic class from globals.css provides RTL + font */
-}
+/* Арабский текст — стили из globals.css через класс .arabic */
+.arabic {}
 
+/* Перевод */
 .translation {
+  font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
   font-size: 0.875rem;
-  color: var(--text-secondary);
+  color: var(--color-milk-dim);
   line-height: 1.8;
 }
 
+/* Горизонтальный разделитель */
 .divider {
   height: 1px;
-  background: var(--border);
+  background: var(--color-border);
   opacity: 0.5;
 }
 
+/* Подвал карточки — аудио и счётчик */
 .footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
   padding-top: 4px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--color-border);
 }
