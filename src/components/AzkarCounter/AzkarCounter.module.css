@@ -1,3 +1,6 @@
+/* Стили счётчика повторений азкара */
+
+/* Обёртка счётчика */
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -6,13 +9,14 @@
   padding: 12px 0;
 }
 
+/* Кнопка-кружок для одного повторения */
 .checkBtn {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 2px solid var(--dot-empty);
+  border: 2px solid var(--color-border);
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--color-milk-dim);
   font-size: 1.4rem;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -21,17 +25,20 @@
   justify-content: center;
 }
 
+/* При наведении на незавершённый счётчик — медный цвет */
 .checkBtn:hover:not(.done) {
-  border-color: var(--dot-filled);
-  color: var(--dot-filled);
+  border-color: var(--color-copper);
+  color: var(--color-copper);
 }
 
+/* Завершённое повторение */
 .checkBtn.done {
-  border-color: var(--accent-done);
-  background: var(--accent-done);
+  border-color: var(--color-done);
+  background: var(--color-done);
   color: white;
 }
 
+/* Ряд точек для 2–10 повторений */
 .dots {
   display: flex;
   gap: 8px;
@@ -41,25 +48,29 @@
   padding: 8px;
 }
 
+/* Одна точка */
 .dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--dot-empty);
+  background: var(--color-border);
   transition: background 0.15s ease, transform 0.15s ease;
   display: inline-block;
 }
 
+/* Заполненная точка — медная */
 .dotFilled {
-  background: var(--dot-filled);
+  background: var(--color-copper);
   transform: scale(1.15);
 }
 
+/* Подпись счётчика */
 .label {
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--color-milk-dim);
 }
 
+/* Кнопка кольцевого счётчика (100 повторений) */
 .ringBtn {
   background: none;
   border: none;
@@ -68,14 +79,16 @@
   border-radius: 50%;
 }
 
+/* Завершённое кольцо */
 .ringBtn.done circle:last-of-type {
-  stroke: var(--accent-done);
+  stroke: var(--color-done);
 }
 
+/* Кнопка сброса */
 .resetBtn {
   background: none;
   border: none;
-  color: var(--text-secondary);
+  color: var(--color-milk-dim);
   font-size: 0.8rem;
   cursor: pointer;
   padding: 4px 8px;
@@ -84,5 +97,5 @@
 }
 
 .resetBtn:hover {
-  color: var(--text-primary);
+  color: var(--color-milk);
 }
