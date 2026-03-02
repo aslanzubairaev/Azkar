@@ -79,11 +79,6 @@
   border-radius: 50%;
 }
 
-/* Завершённое кольцо */
-.ringBtn.done circle:last-of-type {
-  stroke: var(--color-done);
-}
-
 /* Кнопка сброса */
 .resetBtn {
   background: none;

@@ -85,13 +85,13 @@ export default function AzkarCounter({ total, onComplete }: AzkarCounterProps) {
           <circle
             cx="36" cy="36" r={radius}
             fill="none"
-            stroke="var(--dot-empty)"
+            stroke="var(--color-border)"
             strokeWidth="4"
           />
           <circle
             cx="36" cy="36" r={radius}
             fill="none"
-            stroke="var(--accent-ring)"
+            stroke="var(--color-copper)"
             strokeWidth="4"
             strokeDasharray={`${progress} ${circumference}`}
             strokeLinecap="round"
@@ -102,7 +102,7 @@ export default function AzkarCounter({ total, onComplete }: AzkarCounterProps) {
             x="36" y="36"
             textAnchor="middle"
             dominantBaseline="central"
-            fill="var(--text-primary)"
+            fill="var(--color-milk)"
             fontSize="14"
             fontFamily="inherit"
           >
