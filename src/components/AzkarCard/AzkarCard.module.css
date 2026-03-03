@@ -1,59 +1,47 @@
-/* Стили карточки одного азкара — каменная плита с терракотовым акцентом */
+/* Стили карточки одного азкара — премиум-дизайн */
 
 /* Основная карточка */
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-left: 3px solid var(--color-terracotta);
-  border-radius: 8px;
-  padding: 20px 20px 20px 18px;
+  border-top: 2px solid var(--color-terracotta);
+  border-radius: 12px;
+  padding: 24px 24px 20px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition: border-left-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  gap: 16px;
+  box-shadow: 0 2px 12px var(--color-shadow);
+  transition: box-shadow 0.3s ease;
   position: relative;
-  overflow: hidden;
 }
 
-/* При наведении карточка чуть поднимается */
+/* При наведении усиливается тень — без поднятия */
 .card:hover {
-  border-left-color: var(--color-terracotta-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px var(--color-shadow);
-}
-
-/* Декоративный водяной знак — большой номер в правом нижнем углу */
-.card::before {
-  content: attr(data-number);
-  position: absolute;
-  bottom: -10px;
-  right: 12px;
-  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
-  font-size: 6rem;
-  font-weight: 700;
-  color: var(--color-milk);
-  opacity: 0.04;
-  pointer-events: none;
-  line-height: 1;
-  user-select: none;
+  box-shadow: 0 6px 28px var(--color-shadow);
 }
 
 /* Шапка карточки — номер, название, значок повторений */
 .header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
-/* Порядковый номер азкара */
+/* Порядковый номер азкара — в кружке с тонкой границей */
 .number {
   font-family: var(--font-display), 'Playfair Display', Georgia, serif;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  color: var(--color-border);
+  color: var(--color-milk-dim);
   font-variant-numeric: tabular-nums;
-  min-width: 28px;
-  letter-spacing: 0.02em;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* Название азкара */
@@ -73,6 +61,12 @@
   padding: 2px 8px;
   border-radius: 20px;
   font-weight: 600;
+}
+
+/* Арабский текст молитвы */
+.arabic {
+  font-size: 1.65rem;
+  line-height: 2.4;
 }
 
 /* Транслитерация на чеченском — медный курсив */
@@ -97,10 +91,11 @@
   line-height: 1.8;
 }
 
-/* Горизонтальный разделитель */
+/* Пунктирный горизонтальный разделитель */
 .divider {
-  height: 1px;
-  background: var(--color-border);
+  height: 0;
+  border: none;
+  border-top: 1px dashed var(--color-border);
   opacity: 0.5;
 }
 
@@ -110,6 +105,6 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding-top: 4px;
-  border-top: 1px solid var(--color-border);
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-border);
 }

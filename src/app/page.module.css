@@ -1,5 +1,16 @@
 /* Стили главной страницы — расположение контента, вкладки, список карточек */
 
+/* Закреплённая шапка — остаётся вверху экрана при прокрутке */
+.stickyHeader {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+}
+
 .main {
   max-width: 720px;
   margin: 0 auto;
@@ -57,7 +68,7 @@
 
 /* Счётчик активной вкладки — терракотовый оттенок */
 .tab.active .tabCount {
-  background: rgba(193, 105, 79, 0.18);
+  background: color-mix(in srgb, var(--color-terracotta) 18%, transparent);
   color: var(--color-terracotta);
 }
 
@@ -65,21 +76,18 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
-/* Анимация появления одной карточки — задержка задаётся через inline style */
+/* Карточка до появления — скрыта и чуть сдвинута вниз */
 .cardAnimate {
-  animation: cardFadeIn 0.4s ease-out both;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-@keyframes cardFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Карточка после появления в видимой области — плавно показывается */
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }

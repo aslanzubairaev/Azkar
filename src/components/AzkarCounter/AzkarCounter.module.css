@@ -1,4 +1,4 @@
-/* Стили счётчика повторений азкара */
+/* Стили единого кольцевого счётчика повторений */
 
 /* Обёртка счётчика */
 .wrapper {
@@ -9,74 +9,25 @@
   padding: 12px 0;
 }
 
-/* Кнопка-кружок для одного повторения */
-.checkBtn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid var(--color-border);
-  background: transparent;
-  color: var(--color-milk-dim);
-  font-size: 1.4rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* При наведении на незавершённый счётчик — медный цвет */
-.checkBtn:hover:not(.done) {
-  border-color: var(--color-copper);
-  color: var(--color-copper);
-}
-
-/* Завершённое повторение */
-.checkBtn.done {
-  border-color: var(--color-done);
-  background: var(--color-done);
-  color: white;
-}
-
-/* Ряд точек для 2–10 повторений */
-.dots {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-  cursor: pointer;
-  padding: 8px;
-}
-
-/* Одна точка */
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--color-border);
-  transition: background 0.15s ease, transform 0.15s ease;
-  display: inline-block;
-}
-
-/* Заполненная точка — медная */
-.dotFilled {
-  background: var(--color-copper);
-  transform: scale(1.15);
-}
-
-/* Подпись счётчика */
-.label {
-  font-size: 0.8rem;
-  color: var(--color-milk-dim);
-}
-
-/* Кнопка кольцевого счётчика (100 повторений) */
+/* Кольцевая кнопка */
 .ringBtn {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 0;
   border-radius: 50%;
+  transition: transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Тактильная обратная связь — сжатие при каждом тапе */
+.ringBtn.tapping {
+  transform: scale(0.93);
+}
+
+/* Завершённый счётчик — пульсирующая зелёная анимация */
+.ringBtn.done {
+  animation: completePulse 0.6s ease-out;
 }
 
 /* Кнопка сброса */
@@ -93,4 +44,11 @@
 
 .resetBtn:hover {
   color: var(--color-milk);
+}
+
+/* Пульс при завершении */
+@keyframes completePulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }

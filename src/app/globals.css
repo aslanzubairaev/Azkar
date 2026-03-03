@@ -1,6 +1,7 @@
 /*
   Глобальные стили сайта — переменные, сброс стилей, базовые правила.
-  Здесь хранятся цвета палитры «Горный Кавказ», настройки шрифтов
+  Здесь хранятся цвета двух палитр (светлая и тёмная тема),
+  настройки шрифтов, accessibility-настройки (размер шрифта, контраст)
   и единственный глобальный класс .arabic для арабского текста.
   Стили конкретных страниц и компонентов — в их собственных .module.css файлах.
 */
@@ -11,7 +12,8 @@
   padding: 0;
 }
 
-:root {
+/* === Тёмная тема (по умолчанию) === */
+[data-theme="dark"], :root {
   --color-bg:         #252829;
   --color-surface:    #2f3335;
   --color-surface-2:  #383e41;
@@ -21,29 +23,46 @@
   --color-milk:       #f0ebe1;
   --color-milk-dim:   #c4bdb2;
   --color-arabic:     #ffffff;
-  --color-number:     #4a5154;
   --color-done:       #4a9e6b;
-  --color-terracotta-hover: #d97b61; /* терракот при наведении — светлее основного */
-  --color-shadow: rgba(0, 0, 0, 0.35); /* цвет тени карточки */
-  --color-accent-stress: #d44; /* красный цвет для ударных букв в транслитерации */
-
-  /* Обратная совместимость — старые имена указывают на новые значения */
-  --bg-primary:       var(--color-bg);
-  --bg-card:          var(--color-surface);
-  --bg-card-hover:    var(--color-surface-2);
-  --border:           var(--color-border);
-  --text-primary:     var(--color-milk);
-  --text-secondary:   var(--color-milk-dim);
+  --color-shadow: rgba(0, 0, 0, 0.35);
+  --color-accent-stress: #d44;
   --text-arabic:      var(--color-arabic);
-  --text-transliteration: var(--color-copper);
-  --accent:           var(--color-terracotta);
-  --accent-done:      var(--color-done);
-  --accent-ring:      var(--color-copper);
-  --dot-empty:        var(--color-border);
-  --dot-filled:       var(--color-copper);
-  --tab-active-bg:    transparent;
-  --tab-active-border: var(--color-terracotta);
   --font-arabic:      'Noto Naskh Arabic', serif;
+}
+
+/* === Светлая тема === */
+[data-theme="light"] {
+  --color-bg:         #f7f3ed;
+  --color-surface:    #ffffff;
+  --color-surface-2:  #f0ebe3;
+  --color-border:     #ddd5c8;
+  --color-terracotta: #b85a3a;
+  --color-copper:     #6b7c3f;
+  --color-milk:       #2c2520;
+  --color-milk-dim:   #5a524a;
+  --color-arabic:     #1a1510;
+  --color-done:       #3a8a5a;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-accent-stress: #c92020;
+}
+
+/* === Размеры шрифта (accessibility) === */
+[data-fontsize="normal"] { font-size: 16px; }
+[data-fontsize="large"]  { font-size: 18.4px; }
+[data-fontsize="xlarge"] { font-size: 21.6px; }
+
+/* === Высокий контраст === */
+[data-contrast="high"] {
+  --color-milk:       #ffffff;
+  --color-milk-dim:   #e0dcd6;
+  --color-arabic:     #ffffff;
+  --color-border:     #6a6560;
+}
+[data-theme="light"][data-contrast="high"] {
+  --color-milk:       #000000;
+  --color-milk-dim:   #1a1a1a;
+  --color-arabic:     #000000;
+  --color-border:     #8a8580;
 }
 
 html {
@@ -53,12 +72,11 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-milk);
-  /* --font-body задаётся через next/font в layout.tsx */
   font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  /* Лёгкий зернистый шум поверх фона, имитирует текстуру камня */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
 }
 
 .arabic {

@@ -9,5 +9,4 @@ export interface AzkarItem {
   translation: string;
   time: AzkarTime;
   count: number;
-  audioFile?: string; // e.g. "azkar-01.mp3"
 }

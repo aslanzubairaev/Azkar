@@ -1,0 +1,32 @@
+/* Стили кнопки «Наверх» */
+
+.btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-milk);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px var(--color-shadow);
+  transition: background 0.2s, transform 0.2s;
+  z-index: 100;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.btn:hover {
+  background: var(--color-surface-2);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

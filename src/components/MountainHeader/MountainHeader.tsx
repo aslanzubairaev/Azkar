@@ -1,27 +1,30 @@
 /*
-  Этот файл — декоративная шапка сайта.
-  Он показывает SVG-силуэт горных пиков и заголовок «أَذْكَار» с подзаголовком.
-  Горы появляются снизу вверх при загрузке страницы, затем появляется текст.
+  Этот файл — декоративная шапка сайта с фотографией.
+  Для утренних азкаров показывает фото рассвета,
+  для вечерних — фото заката.
+  Поверх фото — заголовок «أَذْكَار» и подзаголовок.
+  При переключении вкладок фото плавно сменяется.
 */
 import styles from './MountainHeader.module.css';
 
-export default function MountainHeader() {
+interface MountainHeaderProps {
+  mode: 'morning' | 'evening';
+}
+
+export default function MountainHeader({ mode }: MountainHeaderProps) {
   return (
     <header className={styles.header}>
-      {/* Декоративный SVG — силуэт горных пиков двух рядов */}
-      <div className={styles.mountains}>
-        <svg
-          viewBox="0 0 800 120"
-          preserveAspectRatio="none"
-          className={styles.mountainSvg}
-          aria-hidden="true"
-        >
-          {/* Задний ряд гор — чуть светлее фона */}
-          <polygon className={styles.mountainBack} points="0,120 80,55 160,90 240,40 320,80 400,20 480,70 560,35 640,75 720,45 800,65 800,120" />
-          {/* Передний ряд гор — цвет фона страницы */}
-          <polygon className={styles.mountainFront} points="0,120 60,80 130,100 200,60 280,95 360,50 440,85 520,55 600,90 680,60 760,85 800,70 800,120" />
-        </svg>
-      </div>
+      {/* Два слоя фотографий — один для утра, другой для вечера; видимость через opacity */}
+      <img
+        src="/images/morning.png"
+        alt="Рассвет"
+        className={`${styles.photo} ${mode === 'morning' ? styles.photoActive : ''}`}
+      />
+      <img
+        src="/images/evening.png"
+        alt="Закат"
+        className={`${styles.photo} ${mode === 'evening' ? styles.photoActive : ''}`}
+      />
 
       {/* Заголовок на арабском */}
       <h1 className={styles.title}>أَذْكَار</h1>

@@ -2,7 +2,8 @@
   Этот файл — корневая оболочка всего сайта.
   Он подключает шрифты (Playfair Display для заголовков и номеров,
   Source Serif 4 для основного текста и переводов,
-  Noto Sans для транслитерации, Noto Naskh Arabic для арабских букв)
+  Noto Sans для транслитерации, Noto Naskh Arabic для арабских букв),
+  добавляет anti-FOUC скрипт для предотвращения мигания темы,
   и задаёт общие метаданные страницы.
   Всё содержимое сайта отображается внутри него.
 */
@@ -46,13 +47,32 @@ export const metadata: Metadata = {
   description: 'Утренние и вечерние азкары с арабским текстом, переводом и аудио',
 };
 
+/* Скрипт, который выполняется до отрисовки страницы — восстанавливает сохранённую тему,
+   размер шрифта и контраст, чтобы страница не мигала при загрузке */
+const antiFouc = `
+(function(){
+  try {
+    var t = localStorage.getItem('azkar-theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+    else document.documentElement.setAttribute('data-theme', 'dark');
+    var f = localStorage.getItem('azkar-fontsize');
+    if (f) document.documentElement.setAttribute('data-fontsize', f);
+    var c = localStorage.getItem('azkar-contrast');
+    if (c) document.documentElement.setAttribute('data-contrast', c);
+  } catch(e){}
+})();
+`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
+    <html lang="ru" data-theme="dark" className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: antiFouc }} />
+      </head>
       <body>{children}</body>
     </html>
   );

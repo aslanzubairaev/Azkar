@@ -1,0 +1,68 @@
+/* Стили шапки сайта — панель с названием и кнопками настроек */
+
+/* Основная панель */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Название сайта — кликабельная кнопка */
+.brand {
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-milk);
+  letter-spacing: 0.03em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s;
+}
+
+.brand:hover {
+  opacity: 0.8;
+}
+
+/* Декоративный полумесяц рядом с названием */
+.brandIcon {
+  font-size: 1.1rem;
+  color: var(--color-terracotta);
+}
+
+/* Группа кнопок справа */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Одна кнопка настроек */
+.btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-milk-dim);
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  font-family: var(--font-body), sans-serif;
+}
+
+.btn:hover {
+  background: var(--color-surface-2);
+  border-color: var(--color-copper);
+  color: var(--color-milk);
+}
