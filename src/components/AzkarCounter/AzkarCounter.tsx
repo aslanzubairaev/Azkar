@@ -16,6 +16,8 @@ interface AzkarCounterProps {
   azkarId: number;
   tab: 'morning' | 'evening';
   onComplete?: (key: string, done: boolean) => void;
+  /* Вызывается при финальном нажатии — для авто-перехода к следующему азкару */
+  onFinished?: () => void;
 }
 
 /* Возвращает сегодняшнюю дату в формате "2026-03-04" */
@@ -44,7 +46,7 @@ function saveProgress(key: string, count: number) {
   localStorage.setItem(getTodayKey(), JSON.stringify(progress));
 }
 
-export default function AzkarCounter({ total, azkarId, tab, onComplete }: AzkarCounterProps) {
+export default function AzkarCounter({ total, azkarId, tab, onComplete, onFinished }: AzkarCounterProps) {
   /* Составной ключ: вкладка + id азкара — чтобы утренний и вечерний прогресс не смешивались */
   const progressKey = `${tab}-${azkarId}`;
 
@@ -71,8 +73,11 @@ export default function AzkarCounter({ total, azkarId, tab, onComplete }: AzkarC
     saveProgress(progressKey, next);
     setTapping(true);
     setTimeout(() => setTapping(false), 100);
-    if (next >= total) onComplete?.(progressKey, true);
-  }, [current, done, total, progressKey, onComplete]);
+    if (next >= total) {
+      onComplete?.(progressKey, true);
+      onFinished?.();
+    }
+  }, [current, done, total, progressKey, onComplete, onFinished]);
 
   /* Сбрасывает счётчик на ноль */
   const handleReset = useCallback(() => {

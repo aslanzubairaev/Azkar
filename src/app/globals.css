@@ -25,7 +25,7 @@
   --color-arabic:     #ffffff;
   --color-done:       #4a9e6b;
   --color-shadow: rgba(0, 0, 0, 0.35);
-  --color-accent-stress: #d44;
+  --color-accent-stress: #d4a574;
   --color-feminine:   #b07dc8;
   --text-arabic:      var(--color-arabic);
   --font-arabic:      'Noto Naskh Arabic', serif;
@@ -44,7 +44,7 @@
   --color-arabic:     #1a1510;
   --color-done:       #3a8a5a;
   --color-shadow: rgba(0, 0, 0, 0.1);
-  --color-accent-stress: #c92020;
+  --color-accent-stress: #c0392b;
   --color-feminine:   #9b59b6;
 }
 
