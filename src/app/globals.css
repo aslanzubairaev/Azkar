@@ -1,26 +1,70 @@
+/*
+  Глобальные стили сайта — переменные, сброс стилей, базовые правила.
+  Здесь хранятся цвета двух палитр (светлая и тёмная тема),
+  настройки шрифтов, accessibility-настройки (размер шрифта, контраст)
+  и единственный глобальный класс .arabic для арабского текста.
+  Стили конкретных страниц и компонентов — в их собственных .module.css файлах.
+*/
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-:root {
-  --bg-primary: #0d1117;
-  --bg-card: #161b22;
-  --bg-card-hover: #1c2230;
-  --border: #30363d;
-  --text-primary: #e6edf3;
-  --text-secondary: #8b949e;
-  --text-arabic: #ffffff;
-  --text-transliteration: #d4a843;
-  --accent: #58a6ff;
-  --accent-done: #3fb950;
-  --accent-ring: #d4a843;
-  --dot-empty: #30363d;
-  --dot-filled: #d4a843;
-  --tab-active-bg: #1c2a40;
-  --tab-active-border: #58a6ff;
-  --font-arabic: 'Noto Naskh Arabic', serif;
+/* === Тёмная тема (по умолчанию) === */
+[data-theme="dark"], :root {
+  --color-bg:         #252829;
+  --color-surface:    #2f3335;
+  --color-surface-2:  #383e41;
+  --color-border:     #4a5154;
+  --color-terracotta: #c1694f;
+  --color-copper:     #b07d4a;
+  --color-milk:       #f0ebe1;
+  --color-milk-dim:   #c4bdb2;
+  --color-arabic:     #ffffff;
+  --color-done:       #4a9e6b;
+  --color-shadow: rgba(0, 0, 0, 0.35);
+  --color-accent-stress: #d44;
+  --color-feminine:   #b07dc8;
+  --text-arabic:      var(--color-arabic);
+  --font-arabic:      'Noto Naskh Arabic', serif;
+}
+
+/* === Светлая тема === */
+[data-theme="light"] {
+  --color-bg:         #f7f3ed;
+  --color-surface:    #ffffff;
+  --color-surface-2:  #f0ebe3;
+  --color-border:     #ddd5c8;
+  --color-terracotta: #b85a3a;
+  --color-copper:     #6b7c3f;
+  --color-milk:       #2c2520;
+  --color-milk-dim:   #5a524a;
+  --color-arabic:     #1a1510;
+  --color-done:       #3a8a5a;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-accent-stress: #c92020;
+  --color-feminine:   #9b59b6;
+}
+
+/* === Размеры шрифта (accessibility) === */
+[data-fontsize="normal"] { font-size: 16px; }
+[data-fontsize="large"]  { font-size: 18.4px; }
+[data-fontsize="xlarge"] { font-size: 21.6px; }
+
+/* === Высокий контраст === */
+[data-contrast="high"] {
+  --color-milk:       #ffffff;
+  --color-milk-dim:   #e0dcd6;
+  --color-arabic:     #ffffff;
+  --color-border:     #6a6560;
+}
+[data-theme="light"][data-contrast="high"] {
+  --color-milk:       #000000;
+  --color-milk-dim:   #1a1a1a;
+  --color-arabic:     #000000;
+  --color-border:     #8a8580;
 }
 
 html {
@@ -28,18 +72,27 @@ html {
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-milk);
+  font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
 }
 
 .arabic {
   font-family: var(--font-arabic);
   direction: rtl;
   text-align: right;
-  font-size: 1.5rem;
-  line-height: 2.2;
+  font-size: 1.35rem;
+  line-height: 2;
   color: var(--text-arabic);
+}
+
+@media (max-width: 600px) {
+  .arabic {
+    font-size: 1.15rem;
+    line-height: 1.9;
+  }
 }

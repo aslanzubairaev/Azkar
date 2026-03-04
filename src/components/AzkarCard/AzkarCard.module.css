@@ -1,75 +1,134 @@
+/* Стили карточки одного азкара — премиум-дизайн */
+
+/* Основная карточка */
 .card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-terracotta);
   border-radius: 12px;
-  padding: 20px;
+  padding: 24px 24px 20px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition: border-color 0.2s;
+  gap: 16px;
+  box-shadow: 0 2px 12px var(--color-shadow);
+  transition: box-shadow 0.3s ease;
+  position: relative;
 }
 
+/* При наведении усиливается тень — без поднятия */
 .card:hover {
-  border-color: #40484f;
+  box-shadow: 0 6px 28px var(--color-shadow);
 }
 
+/* Шапка карточки — номер, название, значок повторений */
 .header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
+/* Порядковый номер азкара — в кружке с тонкой границей */
 .number {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-milk-dim);
   font-variant-numeric: tabular-nums;
-  min-width: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
+/* Название азкара */
 .title {
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--color-milk-dim);
   flex: 1;
 }
 
+/* Значок «×N повторений» */
 .countBadge {
-  font-size: 0.75rem;
-  color: var(--text-transliteration);
-  background: rgba(212, 168, 67, 0.12);
+  font-size: 0.72rem;
+  color: var(--color-copper);
+  background: color-mix(in srgb, var(--color-copper) 14%, transparent);
   padding: 2px 8px;
   border-radius: 20px;
   font-weight: 600;
 }
 
+/* Арабский текст молитвы */
+.arabic {
+  font-size: 1.2rem;
+  line-height: 2;
+}
+
+/* Транслитерация на чеченском — медный курсив */
 .transliteration {
-  font-size: 0.875rem;
-  color: var(--text-transliteration);
+  font-size: 1rem;
+  color: var(--color-milk);
   line-height: 1.7;
   font-style: italic;
+  font-family: var(--font-noto-sans), sans-serif;
 }
 
-.arabic {
-  /* .arabic class from globals.css provides RTL + font */
+/* Ударная буква — красная */
+.accent {
+  color: var(--color-accent-stress);
 }
 
+/* Мужская форма слова — зелёная жирная */
+.masculine {
+  color: var(--color-done);
+  font-weight: 700;
+}
+
+/* Женская форма слова — фиолетовая жирная */
+.feminine {
+  color: var(--color-feminine);
+  font-weight: 700;
+}
+
+/* Перевод */
 .translation {
+  font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
   font-size: 0.875rem;
-  color: var(--text-secondary);
+  color: var(--color-milk);
   line-height: 1.8;
 }
 
+/* Пунктирный горизонтальный разделитель */
 .divider {
-  height: 1px;
-  background: var(--border);
+  height: 0;
+  border: none;
+  border-top: 1px dashed var(--color-border);
   opacity: 0.5;
 }
 
+/* Подвал карточки — аудио и счётчик */
 .footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding-top: 4px;
-  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-border);
+}
+
+/* Мобильные размеры — арабский компактнее, транслитерация чуть мельче */
+@media (max-width: 600px) {
+  .arabic {
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+
+  .transliteration {
+    font-size: 0.9rem;
+  }
 }

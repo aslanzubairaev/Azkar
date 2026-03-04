@@ -1,5 +1,4 @@
-// src/types/azkar.ts
-export type AzkarTime = 'morning' | 'evening' | 'both';
+type AzkarTime = 'morning' | 'evening' | 'both';
 
 export interface AzkarItem {
   id: number;
@@ -9,5 +8,4 @@ export interface AzkarItem {
   translation: string;
   time: AzkarTime;
   count: number;
-  audioFile?: string; // e.g. "azkar-01.mp3"
 }

@@ -1,0 +1,84 @@
+/* Стили кнопки доната и модального окна */
+
+/* Обёртка для центрирования кнопки */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0 20px;
+}
+
+/* Кнопка «Поддержать автора» */
+.btn {
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: 1.5px solid var(--color-terracotta);
+  background: transparent;
+  color: var(--color-terracotta);
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.btn:hover {
+  background: var(--color-terracotta);
+  color: white;
+}
+
+/* Затемнение фона за модалкой */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Модальное окно */
+.modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.modalTitle {
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--color-copper);
+  margin-bottom: 16px;
+}
+
+.modalText {
+  font-size: 0.9rem;
+  color: var(--color-milk-dim);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.modalClose {
+  padding: 8px 24px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  color: var(--color-milk);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modalClose:hover {
+  background: var(--color-border);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
