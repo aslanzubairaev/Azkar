@@ -1,40 +1,57 @@
 /*
   Это выпадающая панель настроек доступности.
-  Она показывает выбор размера шрифта (обычный, увеличенный, крупный)
-  и тумблер высокого контраста.
-  Настройки сохраняются в памяти браузера.
+  Она показывает 3 ползунка для независимой настройки размера шрифта:
+  арабский текст, транскрипция и перевод.
+  Также есть тумблер высокого контраста.
+  Настройки сохраняются в памяти браузера и применяются через CSS-переменные.
 */
 'use client';
 import { useState, useEffect } from 'react';
 import styles from './AccessibilityPanel.module.css';
 
-type FontSize = 'normal' | 'large' | 'xlarge';
+/* Настройки каждого ползунка: ключ в localStorage, CSS-переменная, диапазон */
+const sliders = [
+  { key: 'azkar-font-arabic', cssVar: '--font-size-arabic', label: 'Арабский', min: 0.9, max: 2.0, step: 0.1, defaultVal: 1.2 },
+  { key: 'azkar-font-translit', cssVar: '--font-size-translit', label: 'Транскрипция', min: 0.7, max: 1.6, step: 0.1, defaultVal: 1.0 },
+  { key: 'azkar-font-translation', cssVar: '--font-size-translation', label: 'Перевод', min: 0.7, max: 1.4, step: 0.1, defaultVal: 0.875 },
+] as const;
 
 export default function AccessibilityPanel() {
-  /* Запоминает текущий размер шрифта */
-  const [fontSize, setFontSize] = useState<FontSize>('normal');
+  /* Запоминает текущие значения трёх ползунков */
+  const [values, setValues] = useState<number[]>([1.2, 1.0, 0.875]);
   /* Запоминает, включён ли высокий контраст */
   const [highContrast, setHighContrast] = useState(false);
 
-  /* При загрузке читает сохранённые настройки */
+  /* При загрузке читает сохранённые настройки из памяти браузера */
   useEffect(() => {
-    const savedFont = localStorage.getItem('azkar-fontsize') as FontSize | null;
+    const restored = sliders.map((s) => {
+      const saved = localStorage.getItem(s.key);
+      if (saved) {
+        const num = parseFloat(saved);
+        if (!isNaN(num)) {
+          document.documentElement.style.setProperty(s.cssVar, num + 'rem');
+          return num;
+        }
+      }
+      return s.defaultVal;
+    });
+    setValues(restored);
+
     const savedContrast = localStorage.getItem('azkar-contrast');
-    if (savedFont) {
-      setFontSize(savedFont);
-      document.documentElement.setAttribute('data-fontsize', savedFont);
-    }
     if (savedContrast === 'high') {
       setHighContrast(true);
       document.documentElement.setAttribute('data-contrast', 'high');
     }
   }, []);
 
-  /* Меняет размер шрифта и сохраняет выбор */
-  const changeFontSize = (size: FontSize) => {
-    setFontSize(size);
-    document.documentElement.setAttribute('data-fontsize', size);
-    localStorage.setItem('azkar-fontsize', size);
+  /* Меняет размер шрифта конкретного блока и сохраняет */
+  const changeSize = (index: number, value: number) => {
+    const next = [...values];
+    next[index] = value;
+    setValues(next);
+    const s = sliders[index];
+    document.documentElement.style.setProperty(s.cssVar, value + 'rem');
+    localStorage.setItem(s.key, String(value));
   };
 
   /* Переключает высокий контраст */
@@ -53,33 +70,25 @@ export default function AccessibilityPanel() {
   return (
     <div className={styles.panel}>
       <div className={styles.inner}>
-        {/* Выбор размера шрифта */}
-        <div className={styles.section}>
-          <span className={styles.label}>Размер шрифта</span>
-          <div className={styles.options}>
-            <button
-              className={`${styles.option} ${fontSize === 'normal' ? styles.active : ''}`}
-              onClick={() => changeFontSize('normal')}
-            >
-              A
-            </button>
-            <button
-              className={`${styles.option} ${styles.optionMedium} ${fontSize === 'large' ? styles.active : ''}`}
-              onClick={() => changeFontSize('large')}
-            >
-              A
-            </button>
-            <button
-              className={`${styles.option} ${styles.optionLarge} ${fontSize === 'xlarge' ? styles.active : ''}`}
-              onClick={() => changeFontSize('xlarge')}
-            >
-              A
-            </button>
+        {/* Три ползунка размера шрифта — арабский, транскрипция, перевод */}
+        {sliders.map((s, i) => (
+          <div key={s.key} className={styles.sliderSection}>
+            <span className={styles.label}>{s.label}</span>
+            <input
+              type="range"
+              className={styles.slider}
+              min={s.min}
+              max={s.max}
+              step={s.step}
+              value={values[i]}
+              onChange={(e) => changeSize(i, parseFloat(e.target.value))}
+            />
+            <span className={styles.sliderValue}>{values[i].toFixed(1)}</span>
           </div>
-        </div>
+        ))}
 
         {/* Тумблер высокого контраста */}
-        <div className={styles.section}>
+        <div className={styles.contrastSection}>
           <span className={styles.label}>Высокий контраст</span>
           <button
             className={`${styles.toggle} ${highContrast ? styles.toggleOn : ''}`}

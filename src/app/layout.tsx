@@ -48,17 +48,22 @@ export const metadata: Metadata = {
 };
 
 /* Скрипт, который выполняется до отрисовки страницы — восстанавливает сохранённую тему,
-   размер шрифта и контраст, чтобы страница не мигала при загрузке */
+   размеры шрифтов (арабский, транскрипция, перевод) и контраст,
+   чтобы страница не мигала при загрузке */
 const antiFouc = `
 (function(){
   try {
+    var d = document.documentElement;
     var t = localStorage.getItem('azkar-theme');
-    if (t) document.documentElement.setAttribute('data-theme', t);
-    else document.documentElement.setAttribute('data-theme', 'dark');
-    var f = localStorage.getItem('azkar-fontsize');
-    if (f) document.documentElement.setAttribute('data-fontsize', f);
+    d.setAttribute('data-theme', t || 'dark');
     var c = localStorage.getItem('azkar-contrast');
-    if (c) document.documentElement.setAttribute('data-contrast', c);
+    if (c) d.setAttribute('data-contrast', c);
+    var a = localStorage.getItem('azkar-font-arabic');
+    if (a) d.style.setProperty('--font-size-arabic', a + 'rem');
+    var tr = localStorage.getItem('azkar-font-translit');
+    if (tr) d.style.setProperty('--font-size-translit', tr + 'rem');
+    var tl = localStorage.getItem('azkar-font-translation');
+    if (tl) d.style.setProperty('--font-size-translation', tl + 'rem');
   } catch(e){}
 })();
 `;
@@ -69,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" data-theme="dark" data-fontsize="normal" className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
+    <html lang="ru" data-theme="dark" className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: antiFouc }} />
       </head>

@@ -1,7 +1,7 @@
 /*
   Глобальные стили сайта — переменные, сброс стилей, базовые правила.
   Здесь хранятся цвета двух палитр (светлая и тёмная тема),
-  настройки шрифтов, accessibility-настройки (размер шрифта, контраст)
+  настройки шрифтов, accessibility-настройки (контраст)
   и единственный глобальный класс .arabic для арабского текста.
   Стили конкретных страниц и компонентов — в их собственных .module.css файлах.
 */
@@ -48,11 +48,6 @@
   --color-feminine:   #9b59b6;
 }
 
-/* === Размеры шрифта (accessibility) === */
-[data-fontsize="normal"] { font-size: 16px; }
-[data-fontsize="large"]  { font-size: 18.4px; }
-[data-fontsize="xlarge"] { font-size: 21.6px; }
-
 /* === Высокий контраст === */
 [data-contrast="high"] {
   --color-milk:       #ffffff;
@@ -85,14 +80,14 @@ body {
   font-family: var(--font-arabic);
   direction: rtl;
   text-align: right;
-  font-size: 1.35rem;
+  font-size: var(--font-size-arabic, 1.35rem);
   line-height: 2;
   color: var(--text-arabic);
 }
 
 @media (max-width: 600px) {
   .arabic {
-    font-size: 1.15rem;
+    font-size: var(--font-size-arabic, 1.15rem);
     line-height: 1.9;
   }
 }
