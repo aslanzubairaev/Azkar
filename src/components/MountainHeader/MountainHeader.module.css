@@ -15,7 +15,7 @@
 
 @media (min-width: 768px) {
   .header {
-    height: 100vh;
+    height: 90vh;
   }
 }
 
@@ -35,26 +35,153 @@
   opacity: 1;
 }
 
-/* Арабский заголовок أَذْكَار */
-.title {
+/* Тёмный градиент поверх фото — улучшает читаемость текста */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.7)
+  );
+  z-index: 1;
+}
+
+/* Контейнер текста и кнопки — по центру поверх фото и оверлея */
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+}
+
+/* Пилюля с названием «Утренние/Вечерние азкары» */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Числовой бейдж внутри пилюли — количество азкаров */
+.badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Арабский заголовок — أذكار الصباح / أذكار المساء */
+.titleArabic {
   font-family: var(--font-arabic), 'Noto Naskh Arabic', serif;
   font-size: 3rem;
   color: #ffffff;
   letter-spacing: 0.02em;
-  margin-bottom: 8px;
-  position: relative;
-  z-index: 2;
+  margin: 4px 0 0;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
 }
 
-/* Подзаголовок — курсивный Playfair Display */
-.subtitle {
-  color: rgba(255, 255, 255, 0.85);
+/* Русский заголовок — Утренние/Вечерние азкары */
+.titleRussian {
   font-family: var(--font-display), 'Playfair Display', Georgia, serif;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Подзаголовок — описание */
+.subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  font-size: 0.95rem;
   font-style: italic;
   letter-spacing: 0.05em;
-  position: relative;
-  z-index: 2;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Кнопка «Начать чтение» — стеклянный стиль */
+.cta {
+  margin-top: 8px;
+  padding: 12px 32px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cta:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.cta:active {
+  transform: translateY(0);
+}
+
+/* Десктоп — увеличенные размеры шрифтов */
+@media (min-width: 768px) {
+  .titleArabic {
+    font-size: 4rem;
+  }
+
+  .titleRussian {
+    font-size: 2rem;
+  }
+
+  .content {
+    gap: 16px;
+  }
+}
+
+/* Маленькие экраны — компактные размеры */
+@media (max-width: 480px) {
+  .titleArabic {
+    font-size: 2.2rem;
+  }
+
+  .titleRussian {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .content {
+    gap: 8px;
+  }
+
+  .cta {
+    padding: 10px 24px;
+    font-size: 0.85rem;
+  }
+
+  .label {
+    font-size: 0.7rem;
+    padding: 5px 12px;
+  }
 }

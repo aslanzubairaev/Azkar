@@ -3,7 +3,7 @@
   Он показывает текущий месяц с отмеченными днями, когда человек читал азкары.
   Внизу показывает статистику: текущий страк (подряд идущих дней),
   лучший страк и общее число прочитанных дней.
-  Кнопка «Отметить сегодня» позволяет отметить текущий день как прочитанный.
+  Клик по дню отмечает или снимает отметку чтения.
   Стрелки влево/вправо переключают отображаемый месяц.
   Все данные сохраняются в памяти браузера.
 */
@@ -36,12 +36,12 @@ export default function ReadingTracker() {
 
   /* Сегодняшняя дата в формате строки */
   const todayStr = formatDate(new Date());
-  const isTodayMarked = dates.includes(todayStr);
 
-  /* Отмечает сегодняшний день как прочитанный и сохраняет */
-  const markToday = () => {
-    if (isTodayMarked) return;
-    const next = [...dates, todayStr];
+  /* Отмечает или снимает отметку дня — если дата есть, убирает; если нет, добавляет */
+  const toggleDate = (dateStr: string) => {
+    const next = dates.includes(dateStr)
+      ? dates.filter((d) => d !== dateStr)
+      : [...dates, dateStr];
     setDates(next);
     localStorage.setItem('azkar-reading-dates', JSON.stringify(next));
   };
@@ -135,7 +135,7 @@ export default function ReadingTracker() {
           ))}
         </div>
 
-        {/* Сетка дней */}
+        {/* Сетка дней — клик по дню отмечает или снимает отметку */}
         <div className={styles.grid}>
           {calendarDays.map((day, i) => {
             if (day === null) return <span key={`empty-${i}`} className={styles.emptyDay} />;
@@ -143,43 +143,33 @@ export default function ReadingTracker() {
             const isMarked = dates.includes(dateStr);
             const isToday = dateStr === todayStr;
             return (
-              <span
+              <button
                 key={day}
                 className={`${styles.day} ${isMarked ? styles.dayMarked : ''} ${isToday ? styles.dayToday : ''}`}
+                onClick={() => toggleDate(dateStr)}
+                type="button"
               >
                 {day}
-              </span>
+              </button>
             );
           })}
         </div>
 
-        {/* Статистика */}
+        {/* Статистика — горизонтальная полоска */}
         <div className={styles.stats}>
           <div className={styles.stat}>
             <span className={styles.statIcon}>🔥</span>
-            <span className={styles.statLabel}>Текущий страк:</span>
             <span className={styles.statValue}>{currentStreak} дн.</span>
           </div>
           <div className={styles.stat}>
             <span className={styles.statIcon}>⭐</span>
-            <span className={styles.statLabel}>Лучший страк:</span>
             <span className={styles.statValue}>{bestStreak} дн.</span>
           </div>
           <div className={styles.stat}>
             <span className={styles.statIcon}>📖</span>
-            <span className={styles.statLabel}>Всего дней:</span>
             <span className={styles.statValue}>{dates.length}</span>
           </div>
         </div>
-
-        {/* Кнопка отметки сегодняшнего дня */}
-        <button
-          className={`${styles.markBtn} ${isTodayMarked ? styles.markBtnDone : ''}`}
-          onClick={markToday}
-          disabled={isTodayMarked}
-        >
-          {isTodayMarked ? '✓ Сегодня отмечено' : 'Отметить сегодня ✓'}
-        </button>
       </div>
     </div>
   );

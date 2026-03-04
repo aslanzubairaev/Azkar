@@ -1,5 +1,4 @@
-// src/types/azkar.ts
-export type AzkarTime = 'morning' | 'evening' | 'both';
+type AzkarTime = 'morning' | 'evening' | 'both';
 
 export interface AzkarItem {
   id: number;

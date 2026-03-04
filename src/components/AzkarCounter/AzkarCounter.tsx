@@ -5,38 +5,81 @@
   При каждом нажатии круг сжимается (тактильная обратная связь).
   Когда все повторения выполнены — зелёный фон с пульс-анимацией.
   Кнопка «Сбросить» появляется после завершения.
+  Прогресс сохраняется в памяти браузера и привязан к дате — на следующий день счётчики чистые.
 */
 'use client';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import styles from './AzkarCounter.module.css';
 
 interface AzkarCounterProps {
   total: number;
   azkarId: number;
-  onComplete?: () => void;
+  tab: 'morning' | 'evening';
+  onComplete?: (key: string, done: boolean) => void;
 }
 
-export default function AzkarCounter({ total, azkarId, onComplete }: AzkarCounterProps) {
-  /* Запоминает сколько раз пользователь уже нажал */
+/* Возвращает сегодняшнюю дату в формате "2026-03-04" */
+function getTodayKey() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `azkar-progress-${y}-${m}-${day}`;
+}
+
+/* Читает сохранённый прогресс всех счётчиков за сегодня */
+function loadProgress(): Record<string, number> {
+  try {
+    const raw = localStorage.getItem(getTodayKey());
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+/* Сохраняет прогресс конкретного счётчика в память браузера */
+function saveProgress(key: string, count: number) {
+  const progress = loadProgress();
+  progress[key] = count;
+  localStorage.setItem(getTodayKey(), JSON.stringify(progress));
+}
+
+export default function AzkarCounter({ total, azkarId, tab, onComplete }: AzkarCounterProps) {
+  /* Составной ключ: вкладка + id азкара — чтобы утренний и вечерний прогресс не смешивались */
+  const progressKey = `${tab}-${azkarId}`;
+
+  /* Запоминает сколько раз пользователь уже нажал (начальное значение из памяти браузера) */
   const [current, setCurrent] = useState(0);
   /* Запоминает, идёт ли анимация сжатия при нажатии */
   const [tapping, setTapping] = useState(false);
   const done = current >= total;
+
+  /* При загрузке читает сохранённый прогресс из памяти браузера и сообщает странице статус */
+  useEffect(() => {
+    const saved = loadProgress()[progressKey];
+    if (saved !== undefined && saved > 0) {
+      setCurrent(saved);
+      onComplete?.(progressKey, saved >= total);
+    }
+  }, [progressKey]);
 
   /* Засчитывает одно нажатие с тактильной анимацией */
   const handleTap = useCallback(() => {
     if (done) return;
     const next = current + 1;
     setCurrent(next);
+    saveProgress(progressKey, next);
     setTapping(true);
     setTimeout(() => setTapping(false), 100);
-    if (next >= total) onComplete?.();
-  }, [current, done, total, onComplete]);
+    if (next >= total) onComplete?.(progressKey, true);
+  }, [current, done, total, progressKey, onComplete]);
 
   /* Сбрасывает счётчик на ноль */
   const handleReset = useCallback(() => {
     setCurrent(0);
-  }, []);
+    saveProgress(progressKey, 0);
+    onComplete?.(progressKey, false);
+  }, [progressKey, onComplete]);
 
   /* Параметры SVG-кольца прогресса */
   const size = 80;

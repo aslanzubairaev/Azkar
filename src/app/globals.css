@@ -26,6 +26,7 @@
   --color-done:       #4a9e6b;
   --color-shadow: rgba(0, 0, 0, 0.35);
   --color-accent-stress: #d44;
+  --color-feminine:   #b07dc8;
   --text-arabic:      var(--color-arabic);
   --font-arabic:      'Noto Naskh Arabic', serif;
 }
@@ -44,6 +45,7 @@
   --color-done:       #3a8a5a;
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-accent-stress: #c92020;
+  --color-feminine:   #9b59b6;
 }
 
 /* === Размеры шрифта (accessibility) === */
@@ -83,7 +85,14 @@ body {
   font-family: var(--font-arabic);
   direction: rtl;
   text-align: right;
-  font-size: 1.5rem;
-  line-height: 2.2;
+  font-size: 1.35rem;
+  line-height: 2;
   color: var(--text-arabic);
+}
+
+@media (max-width: 600px) {
+  .arabic {
+    font-size: 1.15rem;
+    line-height: 1.9;
+  }
 }

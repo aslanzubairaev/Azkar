@@ -4,12 +4,20 @@
   Это заглушка — пока без реальной функции оплаты.
 */
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './DonateButton.module.css';
 
 export default function DonateButton() {
   /* Запоминает, открыто ли модальное окно */
   const [modalOpen, setModalOpen] = useState(false);
+
+  /* При прокрутке страницы закрывает модальное окно */
+  useEffect(() => {
+    if (!modalOpen) return;
+    const onScroll = () => setModalOpen(false);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [modalOpen]);
 
   return (
     <>

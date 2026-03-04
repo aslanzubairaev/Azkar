@@ -69,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" data-theme="dark" className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
+    <html lang="ru" data-theme="dark" data-fontsize="normal" className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: antiFouc }} />
       </head>

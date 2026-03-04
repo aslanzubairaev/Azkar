@@ -65,14 +65,14 @@
 
 /* Арабский текст молитвы */
 .arabic {
-  font-size: 1.65rem;
-  line-height: 2.4;
+  font-size: 1.2rem;
+  line-height: 2;
 }
 
 /* Транслитерация на чеченском — медный курсив */
 .transliteration {
-  font-size: 0.875rem;
-  color: var(--color-copper);
+  font-size: 1rem;
+  color: var(--color-milk);
   line-height: 1.7;
   font-style: italic;
   font-family: var(--font-noto-sans), sans-serif;
@@ -83,11 +83,23 @@
   color: var(--color-accent-stress);
 }
 
+/* Мужская форма слова — зелёная жирная */
+.masculine {
+  color: var(--color-done);
+  font-weight: 700;
+}
+
+/* Женская форма слова — фиолетовая жирная */
+.feminine {
+  color: var(--color-feminine);
+  font-weight: 700;
+}
+
 /* Перевод */
 .translation {
   font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
   font-size: 0.875rem;
-  color: var(--color-milk-dim);
+  color: var(--color-milk);
   line-height: 1.8;
 }
 
@@ -107,4 +119,16 @@
   gap: 4px;
   padding-top: 8px;
   border-top: 1px dashed var(--color-border);
+}
+
+/* Мобильные размеры — арабский компактнее, транслитерация чуть мельче */
+@media (max-width: 600px) {
+  .arabic {
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+
+  .transliteration {
+    font-size: 0.9rem;
+  }
 }

@@ -11,7 +11,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px;
 }
 
 /* Навигация по месяцам */
@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .navBtn {
@@ -71,18 +71,28 @@
 }
 
 .emptyDay {
-  aspect-ratio: 1;
+  width: 32px;
+  height: 32px;
 }
 
 .day {
-  aspect-ratio: 1;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
   color: var(--color-milk-dim);
   border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
   transition: background 0.2s;
+}
+
+.day:hover {
+  background: var(--color-surface-2);
 }
 
 /* День с отметкой — зелёный фон */
@@ -97,20 +107,21 @@
   box-shadow: inset 0 0 0 1.5px var(--color-terracotta);
 }
 
-/* Статистика */
+/* Статистика — горизонтальная полоска */
 .stats {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   gap: 8px;
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px dashed var(--color-border);
 }
 
 .stat {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   font-size: 0.85rem;
 }
 
@@ -118,40 +129,9 @@
   font-size: 1rem;
 }
 
-.statLabel {
-  color: var(--color-milk-dim);
-}
-
 .statValue {
   color: var(--color-milk);
   font-weight: 600;
-  margin-left: auto;
-}
-
-/* Кнопка отметки дня */
-.markBtn {
-  width: 100%;
-  padding: 12px;
-  margin-top: 16px;
-  border-radius: 10px;
-  border: 1.5px solid var(--color-terracotta);
-  background: transparent;
-  color: var(--color-terracotta);
-  font-size: 0.9rem;
-  font-family: var(--font-body), sans-serif;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.markBtn:hover:not(.markBtnDone) {
-  background: var(--color-terracotta);
-  color: white;
-}
-
-.markBtnDone {
-  border-color: var(--color-done);
-  color: var(--color-done);
-  cursor: default;
 }
 
 @keyframes slideDown {
