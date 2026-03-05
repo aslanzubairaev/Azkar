@@ -7,7 +7,7 @@
   и задаёт общие метаданные страницы.
   Всё содержимое сайта отображается внутри него.
 */
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Playfair_Display, Source_Serif_4, Noto_Naskh_Arabic, Noto_Sans } from 'next/font/google';
 import './globals.css';
 
@@ -44,21 +44,52 @@ const notoNaskhArabic = Noto_Naskh_Arabic({
 
 export const metadata: Metadata = {
   title: 'Азкары — Утренние и Вечерние',
-  description: 'Утренние и вечерние азкары с арабским текстом, переводом и аудио',
+  description: 'Утренние и вечерние азкары с арабским текстом, транскрипцией на чеченском языке, переводом и счётчиком повторений',
+  keywords: ['азкары', 'утренние азкары', 'вечерние азкары', 'дуа', 'зикр', 'молитвы', 'ислам'],
+  authors: [{ name: 'Azkar App' }],
+  openGraph: {
+    title: 'Азкары — Утренние и Вечерние',
+    description: 'Утренние и вечерние азкары с арабским текстом, транскрипцией и переводом',
+    type: 'website',
+    locale: 'ru_RU',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Азкары — Утренние и Вечерние' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Азкары — Утренние и Вечерние',
+    description: 'Утренние и вечерние азкары с арабским текстом, транскрипцией и переводом',
+    images: ['/og-image.png'],
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+};
+
+/* Настройки отображения — цвет темы и масштаб для мобильных */
+export const viewport: Viewport = {
+  themeColor: '#252829',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 /* Скрипт, который выполняется до отрисовки страницы — восстанавливает сохранённую тему,
-   размер шрифта и контраст, чтобы страница не мигала при загрузке */
+   размеры шрифтов (арабский, транскрипция, перевод) и контраст,
+   чтобы страница не мигала при загрузке */
 const antiFouc = `
 (function(){
   try {
+    var d = document.documentElement;
     var t = localStorage.getItem('azkar-theme');
-    if (t) document.documentElement.setAttribute('data-theme', t);
-    else document.documentElement.setAttribute('data-theme', 'dark');
-    var f = localStorage.getItem('azkar-fontsize');
-    if (f) document.documentElement.setAttribute('data-fontsize', f);
+    d.setAttribute('data-theme', t || 'dark');
     var c = localStorage.getItem('azkar-contrast');
-    if (c) document.documentElement.setAttribute('data-contrast', c);
+    if (c) d.setAttribute('data-contrast', c);
+    var a = localStorage.getItem('azkar-font-arabic');
+    if (a) d.style.setProperty('--font-size-arabic', a + 'rem');
+    var tr = localStorage.getItem('azkar-font-translit');
+    if (tr) d.style.setProperty('--font-size-translit', tr + 'rem');
+    var tl = localStorage.getItem('azkar-font-translation');
+    if (tl) d.style.setProperty('--font-size-translation', tl + 'rem');
   } catch(e){}
 })();
 `;
@@ -69,9 +100,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" data-theme="dark" data-fontsize="normal" className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
+    <html lang="ru" data-theme="dark" suppressHydrationWarning className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: antiFouc }} />
+        {/* Структурированные данные для поисковых систем */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'Азкары — Утренние и Вечерние',
+          description: 'Утренние и вечерние азкары с арабским текстом, транскрипцией и переводом',
+        }) }} />
       </head>
       <body>{children}</body>
     </html>

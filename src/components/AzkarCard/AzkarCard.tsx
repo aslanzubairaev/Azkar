@@ -15,6 +15,8 @@ interface AzkarCardProps {
   index: number;
   tab: 'morning' | 'evening';
   onComplete?: (key: string, done: boolean) => void;
+  /* Вызывается при финальном нажатии счётчика — для авто-перехода к следующему азкару */
+  onFinished?: () => void;
 }
 
 /* Выделяет мужские [м:] и женские [ж:] формы слов разными цветами */
@@ -48,7 +50,7 @@ function renderWithAccents(text: string) {
   });
 }
 
-export default function AzkarCard({ azkar, index, tab, onComplete }: AzkarCardProps) {
+export default function AzkarCard({ azkar, index, tab, onComplete, onFinished }: AzkarCardProps) {
   return (
     <article className={styles.card}>
       {/* Шапка карточки — номер в кружке, название, значок повторений */}
@@ -81,7 +83,7 @@ export default function AzkarCard({ azkar, index, tab, onComplete }: AzkarCardPr
 
       {/* Подвал — счётчик повторений */}
       <footer className={styles.footer}>
-        <AzkarCounter total={azkar.count} azkarId={azkar.id} tab={tab} onComplete={onComplete} />
+        <AzkarCounter total={azkar.count} azkarId={azkar.id} tab={tab} onComplete={onComplete} onFinished={onFinished} />
       </footer>
     </article>
   );

@@ -19,6 +19,7 @@ import AccessibilityPanel from '@/components/AccessibilityPanel/AccessibilityPan
 import ReadingTracker from '@/components/ReadingTracker/ReadingTracker';
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 import DonateButton from '@/components/DonateButton/DonateButton';
+import AzkarBenefit from '@/components/AzkarBenefit/AzkarBenefit';
 import styles from './page.module.css';
 
 type Tab = 'morning' | 'evening';
@@ -191,12 +192,28 @@ export default function Home() {
           {list.map((azkar, i) => (
             <div
               key={azkar.id}
+              id={`card-${i}`}
               className={styles.cardAnimate}
             >
-              <AzkarCard azkar={azkar} index={i} tab={activeTab} onComplete={handleComplete} />
+              <AzkarCard
+                azkar={azkar}
+                index={i}
+                tab={activeTab}
+                onComplete={handleComplete}
+                onFinished={() => {
+                  /* Через 400ms плавно прокручивает к следующей карточке */
+                  const nextId = `card-${i + 1}`;
+                  setTimeout(() => {
+                    document.getElementById(nextId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 400);
+                }}
+              />
             </div>
           ))}
         </section>
+
+        {/* Мотивационный блок о пользе чтения азкаров */}
+        <AzkarBenefit />
 
         {/* Кнопка поддержки автора внизу страницы */}
         <DonateButton />

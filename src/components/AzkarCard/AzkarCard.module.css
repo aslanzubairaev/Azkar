@@ -65,13 +65,13 @@
 
 /* Арабский текст молитвы */
 .arabic {
-  font-size: 1.2rem;
+  font-size: var(--font-size-arabic, 1.2rem);
   line-height: 2;
 }
 
 /* Транслитерация на чеченском — медный курсив */
 .transliteration {
-  font-size: 1rem;
+  font-size: var(--font-size-translit, 1rem);
   color: var(--color-milk);
   line-height: 1.7;
   font-style: italic;
@@ -98,7 +98,7 @@
 /* Перевод */
 .translation {
   font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
-  font-size: 0.875rem;
+  font-size: var(--font-size-translation, 0.875rem);
   color: var(--color-milk);
   line-height: 1.8;
 }
@@ -124,11 +124,11 @@
 /* Мобильные размеры — арабский компактнее, транслитерация чуть мельче */
 @media (max-width: 600px) {
   .arabic {
-    font-size: 1rem;
+    font-size: var(--font-size-arabic, 1rem);
     line-height: 1.9;
   }
 
   .transliteration {
-    font-size: 0.9rem;
+    font-size: var(--font-size-translit, 0.9rem);
   }
 }
