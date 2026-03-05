@@ -31,12 +31,6 @@
   opacity: 0.8;
 }
 
-/* Декоративный полумесяц рядом с названием */
-.brandIcon {
-  font-size: 1.1rem;
-  color: var(--color-terracotta);
-}
-
 /* Группа кнопок справа */
 .actions {
   display: flex;

@@ -1,0 +1,11 @@
+/* Логотип — полумесяц со звездой, отображается в шапке сайта */
+
+.logo {
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.08);
+}
