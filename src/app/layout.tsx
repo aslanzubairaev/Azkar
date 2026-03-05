@@ -60,10 +60,6 @@ export const metadata: Metadata = {
     description: 'Утренние и вечерние азкары с арабским текстом, транскрипцией и переводом',
     images: ['/og-image.png'],
   },
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
 };
 
 /* Настройки отображения — цвет темы и масштаб для мобильных */

@@ -7,12 +7,12 @@
   z-index: 50;
 }
 
-/* Полоска хедера с фоном — только сам хедер, не панели */
+/* Полоска хедера с фоном — стеклянный эффект с золотой линией снизу */
 .headerBar {
-  background: var(--color-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent);
+  background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-copper) 20%, transparent);
 }
 
 /* Контейнер для выпадающих панелей — абсолютно позиционирован, не расширяет шапку */

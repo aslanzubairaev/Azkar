@@ -1,68 +1,72 @@
-/* Стили шапки сайта — панель с названием и кнопками настроек */
+/* Стили шапки сайта — утончённая панель с логотипом и кнопками настроек */
 
 /* Основная панель */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
+  padding: 10px 20px;
   max-width: 720px;
   margin: 0 auto;
+  position: relative;
 }
 
-/* Название сайта — кликабельная кнопка */
+/* Название сайта с логотипом — кликабельная кнопка */
 .brand {
   font-family: var(--font-display), 'Playfair Display', Georgia, serif;
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--color-milk);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 4px 0;
   display: flex;
   align-items: center;
-  gap: 6px;
-  transition: opacity 0.2s;
+  gap: 8px;
+  transition: color 0.3s ease;
+  position: relative;
 }
 
 .brand:hover {
-  opacity: 0.8;
-}
-
-/* Декоративный полумесяц рядом с названием */
-.brandIcon {
-  font-size: 1.1rem;
-  color: var(--color-terracotta);
+  color: var(--color-copper);
 }
 
 /* Группа кнопок справа */
 .actions {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
-/* Одна кнопка настроек */
+/* Одна кнопка настроек — стеклянный стиль с золотыми акцентами */
 .btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 60%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--color-milk-dim);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  transition: all 0.25s ease;
   font-family: var(--font-body), sans-serif;
 }
 
 .btn:hover {
-  background: var(--color-surface-2);
-  border-color: var(--color-copper);
+  background: color-mix(in srgb, var(--color-copper) 12%, var(--color-surface));
+  border-color: color-mix(in srgb, var(--color-copper) 40%, transparent);
   color: var(--color-milk);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-copper) 10%, transparent);
+}
+
+.btn:active {
+  transform: translateY(0);
 }

@@ -1,12 +1,13 @@
 /*
-  Это шапка сайта — верхняя панель с названием и кнопками настроек.
-  Она показывает название «☪ Азкары» слева (клик — прокрутка наверх),
+  Это шапка сайта — верхняя панель с логотипом и кнопками настроек.
+  Она показывает логотип с названием «Азкары» слева (клик — прокрутка наверх),
   а справа — кнопки: переключатель темы (солнце/луна),
   кнопка размера шрифта (Аа), кнопка календаря чтения.
   Все настройки сохраняются и восстанавливаются при перезагрузке.
 */
 'use client';
 import { useState, useEffect } from 'react';
+import Logo from '@/components/Logo/Logo';
 import styles from './SiteHeader.module.css';
 
 type Theme = 'dark' | 'light';
@@ -44,9 +45,9 @@ export default function SiteHeader({ onAccessibilityClick, onTrackerClick }: Sit
 
   return (
     <header className={styles.header}>
-      {/* Название сайта — клик прокручивает наверх */}
+      {/* Название сайта с логотипом — клик прокручивает наверх */}
       <button className={styles.brand} onClick={scrollToTop} aria-label="Прокрутить наверх">
-        <span className={styles.brandIcon}>☪</span> Азкары
+        <Logo size={28} /> Азкары
       </button>
 
       {/* Группа кнопок настроек */}
