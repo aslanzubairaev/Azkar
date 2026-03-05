@@ -6,6 +6,7 @@
   арабский и русский заголовки, подзаголовок и кнопка «Начать чтение».
   Кнопка прокручивает страницу вниз к списку азкаров.
 */
+import Image from 'next/image';
 import styles from './MountainHeader.module.css';
 
 interface MountainHeaderProps {
@@ -37,14 +38,19 @@ export default function MountainHeader({ mode, azkarCount, onStartReading }: Mou
   return (
     <header className={styles.header}>
       {/* Два слоя фотографий — один для утра, другой для вечера; видимость через opacity */}
-      <img
+      <Image
         src="/images/morning.png"
         alt="Рассвет"
+        fill
+        sizes="100vw"
+        priority
         className={`${styles.photo} ${mode === 'morning' ? styles.photoActive : ''}`}
       />
-      <img
+      <Image
         src="/images/evening.png"
         alt="Закат"
+        fill
+        sizes="100vw"
         className={`${styles.photo} ${mode === 'evening' ? styles.photoActive : ''}`}
       />
 
