@@ -9,6 +9,7 @@
 
 /* Кнопка «Поддержать автора» */
 .btn {
+  min-height: var(--touch-min);
   padding: 12px 28px;
   border-radius: 30px;
   border: 1.5px solid var(--color-terracotta);
@@ -57,19 +58,20 @@
 }
 
 .modalText {
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
   color: var(--color-milk-dim);
   line-height: 1.7;
   margin-bottom: 24px;
 }
 
 .modalClose {
-  padding: 8px 24px;
+  min-height: var(--touch-min);
+  padding: 12px 28px;
   border-radius: 20px;
   border: 1px solid var(--color-border);
   background: var(--color-surface-2);
   color: var(--color-milk);
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
   cursor: pointer;
   transition: background 0.2s;
 }

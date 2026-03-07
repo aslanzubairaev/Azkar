@@ -30,12 +30,12 @@
 /* Порядковый номер азкара — в кружке с тонкой границей */
 .number {
   font-family: var(--font-display), 'Playfair Display', Georgia, serif;
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-milk-dim);
   font-variant-numeric: tabular-nums;
-  width: 36px;
-  height: 36px;
+  width: var(--touch-min);
+  height: var(--touch-min);
   border-radius: 50%;
   border: 1.5px solid var(--color-border);
   display: flex;
@@ -47,7 +47,7 @@
 /* Название азкара */
 .title {
   font-family: var(--font-display), 'Playfair Display', Georgia, serif;
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--color-milk-dim);
   flex: 1;
@@ -55,10 +55,10 @@
 
 /* Значок «×N повторений» */
 .countBadge {
-  font-size: 0.72rem;
+  font-size: var(--font-size-2xs);
   color: var(--color-copper);
   background: color-mix(in srgb, var(--color-copper) 14%, transparent);
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: 20px;
   font-weight: 600;
 }
@@ -98,7 +98,7 @@
 /* Перевод */
 .translation {
   font-family: var(--font-body), 'Source Serif 4', Georgia, serif;
-  font-size: var(--font-size-translation, 0.875rem);
+  font-size: var(--font-size-translation, var(--font-size-sm));
   color: var(--color-milk);
   line-height: 1.8;
 }
@@ -116,7 +116,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   padding-top: 8px;
   border-top: 1px dashed var(--color-border);
 }
@@ -130,5 +130,14 @@
 
   .transliteration {
     font-size: var(--font-size-translit, 0.9rem);
+  }
+}
+
+/* Десктоп — компактный номер */
+@media (min-width: 768px) {
+  .number {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
   }
 }

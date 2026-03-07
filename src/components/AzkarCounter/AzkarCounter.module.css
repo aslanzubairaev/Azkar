@@ -35,9 +35,9 @@
   background: none;
   border: none;
   color: var(--color-milk-dim);
-  font-size: 0.8rem;
+  font-size: var(--font-size-xs);
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 8px 16px;
   border-radius: 4px;
   transition: color 0.2s;
 }

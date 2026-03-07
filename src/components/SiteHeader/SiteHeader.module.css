@@ -37,20 +37,20 @@
 .actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 /* Одна кнопка настроек — стеклянный стиль с золотыми акцентами */
 .btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  border-radius: 12px;
   border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
   background: color-mix(in srgb, var(--color-surface) 60%, transparent);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: var(--color-milk-dim);
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -69,4 +69,12 @@
 
 .btn:active {
   transform: translateY(0);
+}
+
+/* Десктоп — компактные кнопки */
+@media (min-width: 768px) {
+  .btn {
+    width: 36px;
+    height: 36px;
+  }
 }
