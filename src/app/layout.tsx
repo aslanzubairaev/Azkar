@@ -69,6 +69,11 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+/* Скрипт регистрации Service Worker для возможности установки PWA */
+const registerSW = `
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js')}
+`;
+
 /* Скрипт, который выполняется до отрисовки страницы — восстанавливает сохранённую тему,
    размеры шрифтов (арабский, транскрипция, перевод) и контраст,
    чтобы страница не мигала при загрузке */
@@ -98,7 +103,11 @@ export default function RootLayout({
   return (
     <html lang="ru" data-theme="dark" suppressHydrationWarning className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${notoSans.variable} ${notoNaskhArabic.variable}`}>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: registerSW }} />
         <script dangerouslySetInnerHTML={{ __html: antiFouc }} />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Азкары" />
         {/* Структурированные данные для поисковых систем */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',

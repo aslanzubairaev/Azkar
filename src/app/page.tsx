@@ -20,6 +20,7 @@ import ReadingTracker from '@/components/ReadingTracker/ReadingTracker';
 import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 import DonateButton from '@/components/DonateButton/DonateButton';
 import AzkarBenefit from '@/components/AzkarBenefit/AzkarBenefit';
+import InstallPrompt from '@/components/InstallPrompt/InstallPrompt';
 import styles from './page.module.css';
 
 type Tab = 'morning' | 'evening';
@@ -42,6 +43,10 @@ function autoMarkToday() {
 }
 
 export default function Home() {
+  /* Данные кнопки установки приложения: видна ли она и что делать при нажатии */
+  const [installBtn, setInstallBtn] = useState<{ visible: boolean; onClick: () => void }>({
+    visible: false, onClick: () => {},
+  });
   /* Запоминает, какая вкладка сейчас выбрана: утренние или вечерние азкары */
   const [activeTab, setActiveTab] = useState<Tab>('morning');
   /* Открыта ли панель настроек доступности */
@@ -142,6 +147,7 @@ export default function Home() {
           <SiteHeader
             onAccessibilityClick={() => setA11yOpen(!a11yOpen)}
             onTrackerClick={() => setTrackerOpen(!trackerOpen)}
+            installButton={installBtn}
           />
         </div>
 
@@ -223,6 +229,9 @@ export default function Home() {
 
       {/* Кнопка прокрутки наверх — появляется при прокрутке вниз */}
       <ScrollToTop />
+
+      {/* Компонент установки приложения — управляет кнопкой в шапке и модалкой iOS */}
+      <InstallPrompt onStateChange={(visible, onClick) => setInstallBtn({ visible, onClick })} />
     </>
   );
 }

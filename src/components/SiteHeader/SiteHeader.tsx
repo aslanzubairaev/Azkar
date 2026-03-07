@@ -16,9 +16,10 @@ type Theme = 'dark' | 'light';
 interface SiteHeaderProps {
   onAccessibilityClick: () => void;
   onTrackerClick: () => void;
+  installButton?: { visible: boolean; onClick: () => void };
 }
 
-export default function SiteHeader({ onAccessibilityClick, onTrackerClick }: SiteHeaderProps) {
+export default function SiteHeader({ onAccessibilityClick, onTrackerClick, installButton }: SiteHeaderProps) {
   /* Запоминает текущую тему — тёмную или светлую */
   const [theme, setTheme] = useState<Theme>('dark');
   /* Сегодняшнее число месяца для бейджа на кнопке календаря (null до загрузки на клиенте) */
@@ -67,6 +68,18 @@ export default function SiteHeader({ onAccessibilityClick, onTrackerClick }: Sit
 
       {/* Группа кнопок настроек */}
       <div className={styles.actions}>
+        {/* Кнопка установки приложения — появляется только на мобильных, если можно установить */}
+        {installButton?.visible && (
+          <button
+            className={styles.btn}
+            onClick={installButton.onClick}
+            aria-label="Установить приложение"
+            title="Установить"
+          >
+            📲
+          </button>
+        )}
+
         {/* Переключатель темы — солнце для светлой, луна для тёмной */}
         <button
           className={styles.btn}
