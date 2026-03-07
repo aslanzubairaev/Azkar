@@ -18,12 +18,44 @@ export default function ReadingTracker() {
   const [viewYear, setViewYear] = useState(new Date().getFullYear());
   const [viewMonth, setViewMonth] = useState(new Date().getMonth());
 
-  /* При загрузке читает сохранённые даты из памяти браузера */
-  useEffect(() => {
+  /* Читает даты из памяти браузера, проверяя что данные корректные */
+  const loadDates = () => {
     const saved = localStorage.getItem('azkar-reading-dates');
     if (saved) {
-      try { setDates(JSON.parse(saved)); } catch {}
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          /* Оставляем только строки формата "ГГГГ-ММ-ДД" */
+          const valid = parsed.filter(
+            (d: unknown) => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d)
+          );
+          setDates(valid);
+          return;
+        }
+      } catch {}
     }
+    setDates([]);
+  };
+
+  /* При загрузке — читаем сохранённые даты */
+  useEffect(() => {
+    loadDates();
+  }, []);
+
+  /* Слушает изменения в памяти браузера из другой вкладки */
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'azkar-reading-dates') loadDates();
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
+  /* Слушает обновление дат из autoMarkToday (когда 100% прогресс) */
+  useEffect(() => {
+    const onCustomUpdate = () => loadDates();
+    window.addEventListener('azkar-dates-updated', onCustomUpdate);
+    return () => window.removeEventListener('azkar-dates-updated', onCustomUpdate);
   }, []);
 
   /* Форматирует дату в строку "2026-03-01" */
@@ -37,8 +69,10 @@ export default function ReadingTracker() {
   /* Сегодняшняя дата в формате строки */
   const todayStr = formatDate(new Date());
 
-  /* Отмечает или снимает отметку дня — если дата есть, убирает; если нет, добавляет */
+  /* Отмечает или снимает отметку дня — если дата есть, убирает; если нет, добавляет.
+     Будущие даты отметить нельзя. */
   const toggleDate = (dateStr: string) => {
+    if (dateStr > todayStr) return;
     const next = dates.includes(dateStr)
       ? dates.filter((d) => d !== dateStr)
       : [...dates, dateStr];
@@ -142,11 +176,13 @@ export default function ReadingTracker() {
             const dateStr = `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             const isMarked = dates.includes(dateStr);
             const isToday = dateStr === todayStr;
+            const isFuture = dateStr > todayStr;
             return (
               <button
                 key={day}
-                className={`${styles.day} ${isMarked ? styles.dayMarked : ''} ${isToday ? styles.dayToday : ''}`}
+                className={`${styles.day} ${isMarked ? styles.dayMarked : ''} ${isToday ? styles.dayToday : ''} ${isFuture ? styles.dayFuture : ''}`}
                 onClick={() => toggleDate(dateStr)}
+                disabled={isFuture}
                 type="button"
               >
                 {day}

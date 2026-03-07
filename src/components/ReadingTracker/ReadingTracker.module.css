@@ -107,6 +107,16 @@
   box-shadow: inset 0 0 0 1.5px var(--color-terracotta);
 }
 
+/* Будущий день — неактивный, приглушённый */
+.dayFuture {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.dayFuture:hover {
+  background: transparent;
+}
+
 /* Статистика — горизонтальная полоска */
 .stats {
   display: flex;

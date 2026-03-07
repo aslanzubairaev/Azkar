@@ -36,6 +36,8 @@ function autoMarkToday() {
   if (!dates.includes(todayStr)) {
     dates.push(todayStr);
     localStorage.setItem('azkar-reading-dates', JSON.stringify(dates));
+    /* Уведомляет открытый календарь чтения об обновлении дат */
+    window.dispatchEvent(new Event('azkar-dates-updated'));
   }
 }
 
