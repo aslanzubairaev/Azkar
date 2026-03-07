@@ -8,6 +8,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Logo from '@/components/Logo/Logo';
+import CalendarDayIcon from '@/components/CalendarDayIcon/CalendarDayIcon';
 import styles from './SiteHeader.module.css';
 
 type Theme = 'dark' | 'light';
@@ -15,11 +16,14 @@ type Theme = 'dark' | 'light';
 interface SiteHeaderProps {
   onAccessibilityClick: () => void;
   onTrackerClick: () => void;
+  installButton?: { visible: boolean; onClick: () => void };
 }
 
-export default function SiteHeader({ onAccessibilityClick, onTrackerClick }: SiteHeaderProps) {
+export default function SiteHeader({ onAccessibilityClick, onTrackerClick, installButton }: SiteHeaderProps) {
   /* Запоминает текущую тему — тёмную или светлую */
   const [theme, setTheme] = useState<Theme>('dark');
+  /* Сегодняшнее число месяца для бейджа на кнопке календаря (null до загрузки на клиенте) */
+  const [todayDate, setTodayDate] = useState<number | null>(null);
 
   /* При загрузке страницы читает сохранённую тему из памяти браузера */
   useEffect(() => {
@@ -28,6 +32,18 @@ export default function SiteHeader({ onAccessibilityClick, onTrackerClick }: Sit
       setTheme(saved);
       document.documentElement.setAttribute('data-theme', saved);
     }
+  }, []);
+
+  /* Устанавливает сегодняшнее число и обновляет его в полночь */
+  useEffect(() => {
+    setTodayDate(new Date().getDate());
+    const now = new Date();
+    const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const msUntilMidnight = midnight.getTime() - now.getTime();
+    const timer = setTimeout(() => {
+      setTodayDate(new Date().getDate());
+    }, msUntilMidnight);
+    return () => clearTimeout(timer);
   }, []);
 
   /* Переключает тему между тёмной и светлой и сохраняет выбор */
@@ -52,6 +68,18 @@ export default function SiteHeader({ onAccessibilityClick, onTrackerClick }: Sit
 
       {/* Группа кнопок настроек */}
       <div className={styles.actions}>
+        {/* Кнопка установки приложения — появляется только на мобильных, если можно установить */}
+        {installButton?.visible && (
+          <button
+            className={styles.btn}
+            onClick={installButton.onClick}
+            aria-label="Установить приложение"
+            title="Установить"
+          >
+            📲
+          </button>
+        )}
+
         {/* Переключатель темы — солнце для светлой, луна для тёмной */}
         <button
           className={styles.btn}
@@ -72,14 +100,14 @@ export default function SiteHeader({ onAccessibilityClick, onTrackerClick }: Sit
           Аа
         </button>
 
-        {/* Кнопка календаря чтения */}
+        {/* Кнопка календаря чтения — кастомная иконка с числом дня */}
         <button
           className={styles.btn}
           onClick={onTrackerClick}
-          aria-label="Календарь чтения"
+          aria-label={`Календарь чтения${todayDate ? `. Сегодня ${todayDate} число` : ''}`}
           title="Календарь чтения"
         >
-          📅
+          <CalendarDayIcon day={todayDate} />
         </button>
       </div>
     </header>

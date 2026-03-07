@@ -1,0 +1,83 @@
+/* Стили модалки с инструкцией установки на iOS */
+
+/* Затемнение фона за модалкой */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Модальное окно */
+.modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+/* Заголовок модалки */
+.modalTitle {
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--color-copper);
+  margin-bottom: 20px;
+}
+
+/* Один шаг инструкции */
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  margin-bottom: 16px;
+  font-size: var(--font-size-sm);
+  color: var(--color-milk-dim);
+  line-height: 1.6;
+}
+
+/* Номер шага */
+.stepNumber {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-copper) 15%, var(--color-surface));
+  color: var(--color-copper);
+  font-family: var(--font-display), 'Playfair Display', Georgia, serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Кнопка закрытия */
+.modalClose {
+  min-height: var(--touch-min);
+  padding: 12px 28px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  color: var(--color-milk);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.modalClose:hover {
+  background: var(--color-border);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

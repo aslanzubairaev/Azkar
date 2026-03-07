@@ -29,6 +29,12 @@
   --color-feminine:   #b07dc8;
   --text-arabic:      var(--color-arabic);
   --font-arabic:      'Noto Naskh Arabic', serif;
+
+  /* === Токены размеров (mobile-first) === */
+  --font-size-2xs:    0.75rem;   /* 12px — минимум для бейджей/счётчиков */
+  --font-size-xs:     0.8125rem; /* 13px — мелкий вспомогательный */
+  --font-size-sm:     0.875rem;  /* 14px — минимум для основного текста */
+  --touch-min:        44px;      /* минимальный touch-target */
 }
 
 /* === Светлая тема === */
@@ -46,6 +52,13 @@
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-accent-stress: #c0392b;
   --color-feminine:   #9b59b6;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font-size-2xs: 0.72rem;
+    --font-size-xs:  0.78rem;
+  }
 }
 
 /* === Высокий контраст === */
