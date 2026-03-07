@@ -1,4 +1,4 @@
-/* Стили кнопки доната и модального окна */
+/* Стили кнопки «Поддержать проект» и модального окна с выбором способа оплаты */
 
 /* Обёртка для центрирования кнопки */
 .wrapper {
@@ -7,7 +7,7 @@
   padding: 40px 0 20px;
 }
 
-/* Кнопка «Поддержать автора» */
+/* Кнопка «Поддержать проект» */
 .btn {
   min-height: var(--touch-min);
   padding: 12px 28px;
@@ -37,6 +37,7 @@
   justify-content: center;
   z-index: 200;
   animation: fadeIn 0.2s ease-out;
+  padding: 16px;
 }
 
 /* Модальное окно */
@@ -44,40 +45,177 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 16px;
-  padding: 32px;
+  padding: 28px 24px;
   max-width: 400px;
-  width: 90%;
+  width: 100%;
   text-align: center;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modalTitle {
   font-family: var(--font-display), 'Playfair Display', Georgia, serif;
   font-size: 1.2rem;
   color: var(--color-copper);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .modalText {
-  font-size: var(--font-size-sm);
+  font-size: 1rem;
   color: var(--color-milk-dim);
   line-height: 1.7;
   margin-bottom: 24px;
 }
 
-.modalClose {
+/* Вертикальная группа кнопок действий */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Общие стили для крупных кнопок действий */
+.actionBtn {
+  min-height: 52px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.actionBtn:active {
+  transform: scale(0.98);
+}
+
+.actionBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Кнопка Stripe — акцентный цвет */
+.stripeBtn {
+  background: var(--color-terracotta);
+  color: white;
+}
+
+/* Подсказка под кнопкой Stripe */
+.hint {
+  font-size: 0.8125rem;
+  color: var(--color-milk-dim);
+  margin-top: -4px;
+  line-height: 1.4;
+}
+
+/* Кнопка Сбер — зелёный */
+.sberBtn {
+  background: #2e7d32;
+  color: white;
+}
+
+/* Кнопка «Поделиться» — нейтральная */
+.shareBtn {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-milk);
+}
+
+.shareBtn:hover {
+  background: var(--color-surface-2);
+}
+
+/* === Экран Сбера === */
+
+/* QR-код */
+.qrImage {
+  max-width: 260px;
+  width: 100%;
+  border-radius: 12px;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+/* Инструкция для QR */
+.sberInstruction {
+  font-size: 0.9375rem;
+  color: var(--color-milk-dim);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Строка с номером телефона и кнопкой копирования */
+.phoneRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.phoneNumber {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-milk);
+  letter-spacing: 0.03em;
+}
+
+/* Кнопка копирования */
+.copyBtn {
   min-height: var(--touch-min);
-  padding: 12px 28px;
-  border-radius: 20px;
+  padding: 10px 18px;
+  border-radius: 12px;
   border: 1px solid var(--color-border);
   background: var(--color-surface-2);
   color: var(--color-milk);
-  font-size: var(--font-size-sm);
+  font-size: 0.875rem;
   cursor: pointer;
   transition: background 0.2s;
 }
 
-.modalClose:hover {
+.copyBtn:hover {
   background: var(--color-border);
+}
+
+/* Кнопка «Назад» */
+.backBtn {
+  min-height: var(--touch-min);
+  padding: 12px 28px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-milk-dim);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.backBtn:hover {
+  background: var(--color-surface-2);
+}
+
+/* Всплывающее уведомление «Скопировано» */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-surface-2);
+  color: var(--color-milk);
+  border: 1px solid var(--color-border);
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  z-index: 300;
+  animation: fadeIn 0.2s ease-out;
 }
 
 @keyframes fadeIn {
